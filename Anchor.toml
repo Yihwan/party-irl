@@ -1,0 +1,14 @@
+[features]
+seeds = false
+[programs.localnet]
+party_irl = "XxFzjuDV8dptxFvY5v4AzQZk9j8h8Afpoi8WNU6uVtq"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "localnet"
+wallet = "/Users/yihwankim/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
