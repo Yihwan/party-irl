@@ -1,0 +1,241 @@
+{
+  "version": "0.1.0",
+  "name": "party_irl",
+  "instructions": [
+    {
+      "name": "createParty",
+      "accounts": [
+        {
+          "name": "party",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "creator",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "maximumGuests",
+          "type": "u32"
+        },
+        {
+          "name": "partyAt",
+          "type": "i64"
+        },
+        {
+          "name": "checkInEndsAt",
+          "type": "i64"
+        },
+        {
+          "name": "stakeInLamports",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "addGuest",
+      "accounts": [
+        {
+          "name": "guest",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "party",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "guestAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "checkInGuest",
+      "accounts": [
+        {
+          "name": "guest",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "party",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "guestAuthority",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "settleGuest",
+      "accounts": [
+        {
+          "name": "guest",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "party",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "guestAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Party",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "creator",
+            "type": "publicKey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "partyAt",
+            "type": "i64"
+          },
+          {
+            "name": "checkInEndsAt",
+            "type": "i64"
+          },
+          {
+            "name": "stakeInLamports",
+            "type": "u64"
+          },
+          {
+            "name": "maximumGuests",
+            "type": "u32"
+          },
+          {
+            "name": "addedGuestsCount",
+            "type": "u32"
+          },
+          {
+            "name": "checkedInGuestsCount",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Guest",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "guestAuthority",
+            "type": "publicKey"
+          },
+          {
+            "name": "party",
+            "type": "publicKey"
+          },
+          {
+            "name": "hasCheckedIn",
+            "type": "bool"
+          },
+          {
+            "name": "hasSettledStake",
+            "type": "bool"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "PartyNameTooLong",
+      "msg": "Party name can't be longer than 64 characters."
+    },
+    {
+      "code": 6001,
+      "name": "PartyAtInThePast",
+      "msg": "Party start time can't be in the past."
+    },
+    {
+      "code": 6002,
+      "name": "PartyFull",
+      "msg": "Party is full."
+    },
+    {
+      "code": 6003,
+      "name": "CheckInTimeTooShort",
+      "msg": "Check-in time must be longer than 5 minutes."
+    },
+    {
+      "code": 6004,
+      "name": "CheckInNotOpen",
+      "msg": "Check-in is not open."
+    },
+    {
+      "code": 6005,
+      "name": "AlreadyCheckedIn",
+      "msg": "You have already checked-in."
+    },
+    {
+      "code": 6006,
+      "name": "TooEarlyToSettle",
+      "msg": "Check-in is still open."
+    },
+    {
+      "code": 6007,
+      "name": "CannotSettle",
+      "msg": "You cannot settle."
+    }
+  ],
+  "metadata": {
+    "address": "XxFzjuDV8dptxFvY5v4AzQZk9j8h8Afpoi8WNU6uVtq"
+  }
+}
