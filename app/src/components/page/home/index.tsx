@@ -1,5 +1,5 @@
 import {
-    WalletMultiButton
+  WalletMultiButton
 } from '@solana/wallet-adapter-react-ui';
 
 const Home = () => (
