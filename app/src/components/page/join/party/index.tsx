@@ -8,7 +8,7 @@ const Party = ({ partyAddress }) => {
 
   useEffect(() => {
     async function fetchParties() {
-      if (!program) {
+      if (!program || !partyAddress) {
         return;
       }
 
@@ -17,17 +17,22 @@ const Party = ({ partyAddress }) => {
         console.log(partyPublicKey)
         const party = await program.account.party.fetch(partyPublicKey);
         // @ts-ignore
-        setParties(party);
+        setParty(party);
       } catch (e) {
         console.log("initial fetch tx error: ", e);
       }
     }
 
     fetchParties();
-  }, [program]);
+  }, [program, partyAddress]);
 
   return(
-    <div>Party: {partyAddress}</div>
+    <>
+      <div>Party: {partyAddress}</div>
+      <code>
+        {JSON.stringify(party, null, 4)}
+      </code>
+    </>
   )
 };
 

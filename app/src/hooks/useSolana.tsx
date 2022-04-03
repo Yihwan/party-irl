@@ -6,6 +6,7 @@ import { useAnchorWallet } from "@solana/wallet-adapter-react";
 
 import idl from '../idl.json';
 
+// TODO: Change this to read-only RPC request from connection.
 const DUMMY_WALLET = {
   async signTransaction(tx: Transaction) {
     return tx;
