@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { AnchorWallet } from "@solana/wallet-adapter-react";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { Provider, Program, Idl } from "@project-serum/anchor";
-import { useAnchorWallet } from "@solana/wallet-adapter-react";
+import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
 
 import idl from '../idl.json';
 
@@ -13,35 +13,31 @@ const PROVIDER_OPTIONS: { preflightCommitment: "processed" } = {
 };
 type  Maybe<T> = T | null;
 
-const useSolana = () => {
+const getProvider = (wallet: AnchorWallet) => {
   const connection = new Connection(
     CONNECTION_ENDPOINT,
     PROVIDER_OPTIONS.preflightCommitment
   );
+  return new Provider(connection, wallet, PROVIDER_OPTIONS)
+};
+
+const useSolana = () => {
   const wallet = useAnchorWallet();
   const [program, setProgram] = useState<Maybe<Program<Idl>>>(null);
-  const [provider, setProvider] = useState(null);
-
-  const getProvider = (wallet: AnchorWallet) => new Provider(connection, wallet, PROVIDER_OPTIONS);
 
   useEffect(() => {
     if (!wallet) {
       return;
     }
 
-    const providerInner = getProvider(wallet);
-    const programInner = new Program(idl as Idl, PROGRAM_ID, providerInner);
+    const provider = getProvider(wallet);
+    const programInner = new Program(idl as Idl, PROGRAM_ID, provider);
 
     setProgram(programInner);
-    // @ts-ignore
-    setProvider(providerInner);
   }, [wallet]);
 
   return {
-    wallet,
     program,
-    provider,
-    connection,
   };
 }
 
