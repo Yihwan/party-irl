@@ -1,13 +1,16 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+import { NextUIProvider } from '@nextui-org/react';
 
 import WalletContext from '../src/contexts/wallet';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return(
-    <WalletContext>
-      <Component {...pageProps} />
-    </WalletContext>
+    <NextUIProvider>
+      <WalletContext>
+        <Component {...pageProps} />
+      </WalletContext>
+    </NextUIProvider>
   )
 }
 
