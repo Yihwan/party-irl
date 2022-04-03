@@ -1,10 +1,20 @@
 import { useEffect, useState } from 'react';
 import { AnchorWallet } from "@solana/wallet-adapter-react";
-import { Connection, PublicKey } from "@solana/web3.js";
+import { Connection, PublicKey, Transaction, Keypair } from "@solana/web3.js";
 import { Provider, Program, Idl } from "@project-serum/anchor";
-import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
+import { useAnchorWallet } from "@solana/wallet-adapter-react";
 
 import idl from '../idl.json';
+
+const DUMMY_WALLET = {
+  async signTransaction(tx: Transaction) {
+    return tx;
+  },
+  async signAllTransactions(txs: Transaction[]) {
+    return txs;
+  },
+  publicKey: Keypair.generate().publicKey,
+}
 
 const PROGRAM_ID = new PublicKey(idl.metadata.address);
 const CONNECTION_ENDPOINT='http://127.0.0.1:8899'
@@ -13,24 +23,20 @@ const PROVIDER_OPTIONS: { preflightCommitment: "processed" } = {
 };
 type  Maybe<T> = T | null;
 
-const getProvider = (wallet: AnchorWallet) => {
+const useSolana = () => {
   const connection = new Connection(
     CONNECTION_ENDPOINT,
     PROVIDER_OPTIONS.preflightCommitment
   );
-  return new Provider(connection, wallet, PROVIDER_OPTIONS)
-};
-
-const useSolana = () => {
   const wallet = useAnchorWallet();
   const [program, setProgram] = useState<Maybe<Program<Idl>>>(null);
 
-  useEffect(() => {
-    if (!wallet) {
-      return;
-    }
+  const getProvider = (wallet: AnchorWallet) => {
+    return new Provider(connection, wallet, PROVIDER_OPTIONS)
+  };
 
-    const provider = getProvider(wallet);
+  useEffect(() => {
+    const provider = getProvider(wallet || DUMMY_WALLET);
     const programInner = new Program(idl as Idl, PROGRAM_ID, provider);
 
     setProgram(programInner);
@@ -38,6 +44,9 @@ const useSolana = () => {
 
   return {
     program,
+    connection,
+    wallet,
+    PROGRAM_ID,
   };
 }
 

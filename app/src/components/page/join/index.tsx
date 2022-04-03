@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 import useSolana from 'src/hooks/useSolana';
-
 const Join = () => {
   const { program } = useSolana();
   const [parties, setParties] = useState(null);
