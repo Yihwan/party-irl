@@ -5,7 +5,7 @@ import Footer from './footer';
 
 const Layout: FC = ({ children }) => (
   <>
-    <Nav /> 
+    <Nav />
 
     {children}
 

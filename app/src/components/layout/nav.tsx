@@ -1,9 +1,5 @@
 const Nav = () => {
-  return(
-    <nav>
-      partyIRL
-    </nav>
-  )
+  return <nav>partyIRL</nav>;
 };
 
 export default Nav;

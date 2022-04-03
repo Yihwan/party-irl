@@ -1,5 +1,5 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import type { NextPage } from 'next';
+import Head from 'next/head';
 
 import Start from '../src/components/page/start';
 
@@ -14,7 +14,7 @@ const StartPage: NextPage = () => {
 
       <Start />
     </div>
-  )
-}
+  );
+};
 
 export default StartPage;

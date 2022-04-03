@@ -1,17 +1,19 @@
-import {
-  WalletMultiButton,
-} from '@solana/wallet-adapter-react-ui';
-import { useAnchorWallet } from "@solana/wallet-adapter-react";
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { useAnchorWallet } from '@solana/wallet-adapter-react';
 
 const Start = () => {
   const wallet = useAnchorWallet();
 
-  return(
+  return (
     <div>
-      {wallet ? <div style={{ fontFamily: 'Space Mono'}}>START!</div> : <div>Connect wallet</div>}
+      {wallet ? (
+        <div style={{ fontFamily: 'Space Mono' }}>START!</div>
+      ) : (
+        <div>Connect wallet</div>
+      )}
       <WalletMultiButton />
     </div>
   );
-}
+};
 
 export default Start;

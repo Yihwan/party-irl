@@ -1,9 +1,5 @@
 const Footer = () => {
-  return(
-    <footer>
-      built by yihwan.
-    </footer>
-  )
+  return <footer>built by yihwan.</footer>;
 };
 
 export default Footer;
