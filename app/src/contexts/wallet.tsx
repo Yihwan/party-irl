@@ -44,7 +44,7 @@ const WalletContext: FC = ({ children }) => {
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets}>
+      <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
           {/* Your app's components go here, nested within the context providers. */}
           {children}
