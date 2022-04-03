@@ -14,7 +14,6 @@ const Party = ({ partyAddress }) => {
 
       try {
         const partyPublicKey = new PublicKey(partyAddress);
-        console.log(partyPublicKey)
         const party = await program.account.party.fetch(partyPublicKey);
         // @ts-ignore
         setParty(party);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnchorWallet } from "@solana/wallet-adapter-react";
-import { Connection, PublicKey, Transaction, Keypair } from "@solana/web3.js";
-import { Provider, Program, Idl } from "@project-serum/anchor";
+import { Connection, PublicKey, Transaction } from "@solana/web3.js";
+import { Provider, Program, Idl, web3 } from "@project-serum/anchor";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 
 import idl from '../idl.json';
@@ -14,7 +14,7 @@ const DUMMY_WALLET = {
   async signAllTransactions(txs: Transaction[]) {
     return txs;
   },
-  publicKey: Keypair.generate().publicKey,
+  publicKey: web3.Keypair.generate().publicKey,
 }
 
 const PROGRAM_ID = new PublicKey(idl.metadata.address);
