@@ -1,8 +1,9 @@
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import { useAnchorWallet } from '@solana/wallet-adapter-react';
+
+import useSolana from 'src/hooks/useSolana';
 
 const Start = () => {
-  const wallet = useAnchorWallet();
+  const { wallet } = useSolana();
 
   return (
     <div>

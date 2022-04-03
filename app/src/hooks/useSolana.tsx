@@ -25,7 +25,7 @@ const useSolana = () => {
   const getProvider = (wallet: AnchorWallet) => new Provider(connection, wallet, PROVIDER_OPTIONS);
 
   useEffect(() => {
-    if (wallet == null) {
+    if (!wallet) {
       return;
     }
 
@@ -36,7 +36,6 @@ const useSolana = () => {
     // @ts-ignore
     setProvider(providerInner);
   }, [wallet]);
-
 
   return {
     wallet,
