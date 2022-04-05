@@ -11,7 +11,7 @@ const Start = () => {
   const [partyAtTime, setPartyAtTime] = useState('');
   const [checkInDuration, setCheckInDuration] = useState('15');
   const [stakeInSol, setStakeInSol] = useState('0');
-  const [maximumGuests, setMaximumGuests] = useState('');
+  const [maximumGuests, setMaximumGuests] = useState('10');
 
   const createParty = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
