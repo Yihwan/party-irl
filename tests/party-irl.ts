@@ -46,7 +46,7 @@ describe("party-irl", () => {
 
   it('cannot create a party that starts in the past', async () => {
     try {
-      await createParty({ partyAt: 0 });
+      await createParty({ partyAt: 1649105580 });
     } catch({ error }) {
         assert.equal(error.errorCode.code, 'PartyAtInThePast');
         return;

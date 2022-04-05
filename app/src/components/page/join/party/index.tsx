@@ -5,12 +5,15 @@ import { web3 } from '@project-serum/anchor';
 
 import AddGuest from './components/addGuest';
 import CheckInGuest from './components/checkInGuest';
+import SettleGuest from './components/settleGuest';
 
 const Party = ({ partyAddress }) => {
   const { program, wallet } = useSolana();
   const [party, setParty] = useState(null);
   const [guestPda, setGuestPda] = useState(null);
   const [guestAccount, setGuestAccount] = useState(null);
+
+  console.log('guestAccount', guestAccount);
 
   /**
    * if guest+party does not exist, render ADD GUEST flow
@@ -58,6 +61,10 @@ const Party = ({ partyAddress }) => {
 
     fetchPartyData();
   }, [program, partyAddress]);
+
+  if (guestAccount && guestAccount.hasCheckedIn) {
+    return <SettleGuest partyData={party} partyAddress={partyAddress} guestPda={guestPda} />
+  }
 
   return(
     <>

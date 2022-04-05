@@ -15,7 +15,7 @@ const Start = () => {
 
   const createParty = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('asd')
+
     if (!wallet || !program) {
       return;
     }
@@ -26,13 +26,9 @@ const Start = () => {
 
     const partyAtUnix = date.unix();
     const checkInEndsAtUnix = checkInDate.unix();
-    console.log(
-      name,
-      new BN(Number(maximumGuests)),
-      new BN(partyAtUnix),
-      new BN(checkInEndsAtUnix),
-      new BN(Number(stakeInSol) * 1_000_000_000), // convert to lamports,
-    )
+
+
+    console.log('partyAtUnix', partyAtUnix);
     await program.rpc.createParty(
       name,
       new BN(Number(maximumGuests)),

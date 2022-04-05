@@ -5,6 +5,7 @@ import useSolana from 'src/hooks/useSolana';
 const Join = () => {
   const { program } = useSolana();
   const [parties, setParties] = useState(null);
+  console.log('parties', parties)
 
   useEffect(() => {
     async function fetchParties() {
