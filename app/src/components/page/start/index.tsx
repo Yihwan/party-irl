@@ -27,21 +27,25 @@ const Start = () => {
     const partyAtUnix = date.unix();
     const checkInEndsAtUnix = checkInDate.unix();
 
-    await program.rpc.createParty(
-      name,
-      new BN(Number(maximumGuests)),
-      new BN(partyAtUnix),
-      new BN(checkInEndsAtUnix),
-      new BN(Number(stakeInSol) * 1_000_000_000), // convert to lamports,
-      {
-        accounts: {
-          party: party.publicKey,
-          creator: wallet.publicKey,
-          systemProgram: web3.SystemProgram.programId,
-        },
-        signers: [party],
-      }
-    )
+    try {
+      await program.rpc.createParty(
+        name,
+        new BN(Number(maximumGuests)),
+        new BN(partyAtUnix),
+        new BN(checkInEndsAtUnix),
+        new BN(Number(stakeInSol) * 1_000_000_000), // convert to lamports,
+        {
+          accounts: {
+            party: party.publicKey,
+            creator: wallet.publicKey,
+            systemProgram: web3.SystemProgram.programId,
+          },
+          signers: [party],
+        }
+      )
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   if (!wallet) {
