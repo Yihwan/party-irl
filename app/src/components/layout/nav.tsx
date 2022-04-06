@@ -54,8 +54,7 @@ const Nav: FC = () => {
         as="nav"
         css={{ 
           fontSize: '18px',
-          paddingTop: '1rem', 
-          paddingBottom: '1rem', 
+          padding: '1rem',
           height: '56px',
           backgroundColor: '$background',
           display: 'flex',

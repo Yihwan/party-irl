@@ -10,8 +10,8 @@ const Layout: FC = ({ children }) => {
     }}>
       <Nav />
 
-      <Container>
-        <main style={{ minHeight: 'calc(100vh - 112px)'}}>
+      <Container css={{ padding: '3rem 1rem', minHeight: 'calc(100vh - 112px)'}}>
+        <main>
           {children}
         </main>
       </Container>

@@ -4,6 +4,7 @@ import { Input, Grid, Spacer } from '@nextui-org/react';
 import { useState } from 'react';
 import useSolana from 'src/hooks/useSolana';
 import dayjs from 'dayjs';
+
 const Start = () => {
   const { wallet, program } = useSolana();
   const [name, setName] = useState('');

@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { PublicKey } from "@solana/web3.js";
 import useSolana from 'src/hooks/useSolana';
+import { Container, Grid, Card, Row, Col, Text, Spacer, Loading } from '@nextui-org/react';
+import dayjs from 'dayjs';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+
+dayjs.extend(LocalizedFormat);
 
 import PartyAction from './components/partyAction';
 
@@ -56,20 +61,51 @@ const Party = ({ partyAddress }) => {
     fetchPartyData();
   }, [program, partyAddress]);
 
+  if (!partyData) {
+    return <Loading />;
+  }
+
+  const { name, partyAt, creator, checkInEndsAt, stakeInLamports, maximumGuests, addedGuestsCount, checkedInGuestsCount } = partyData;
+
+  console.log(partyData)
+
+  const createdBy = `${creator.toBase58().slice(0,5)}...${creator.toBase58().slice(creator.toBase58().length - 4, creator.toBase58().length)}`;
+
   return(
     <>
-      <div>Party: {partyAddress}</div>
-      <code>
-        {JSON.stringify(partyData, null, 4)}
-      </code>
-      <PartyAction 
-        partyAddress={partyAddress} 
-        partyData={partyData}
-        guestPda={guestPda}
-        guestData={guestData}
-      />
+      <Text h1>{name}</Text>
+      <Spacer y={1}/>
+      <Text h4 i>created_by: <a target="_blank" rel="noopener noreferrer" href={`https://explorer.solana.com/address/${creator.toBase58()}?cluster=devnet`} style={{ fontWeight: 400 }}>
+        {createdBy}</a>
+      </Text>
+      <Text h4 i>party_at: <span style={{ fontWeight: 400 }}>{dayjs(partyAt.toNumber() * 1000).format('LLL')}</span></Text>
+      <Text h4 i>check_in_ends_at: <span style={{ fontWeight: 400 }}>{dayjs(checkInEndsAt.toNumber() * 1000).format('LLL')}</span></Text>
+      <Text h4 i>stake_in_sol: <span style={{ fontWeight: 400 }}>{stakeInLamports / 1_000_000_000}</span></Text>
+      <Text h4 i>maximum_guests: <span style={{ fontWeight: 400 }}>{maximumGuests}</span></Text>
+      <Text h4 i>added_guests_count: <span style={{ fontWeight: 400 }}>{addedGuestsCount}</span></Text>
+      <Text h4 i>checked_in_guests_count: <span style={{ fontWeight: 400 }}>{checkedInGuestsCount}</span></Text>
     </>
   )
 };
+
+    // <Grid.Container css={{
+    //   padding: 0,
+    // }}>
+    //   <Grid xs={12} sm={8}>
+    //     a
+    //   </Grid>
+
+    //   <Grid xs={12} sm={4}>
+    //     <Card>
+    //       <PartyAction 
+    //         partyAddress={partyAddress} 
+    //         partyData={partyData}
+    //         guestPda={guestPda}
+    //         guestData={guestData}
+    //       />
+    //     </Card>
+    //   </Grid>
+
+    // </Grid.Container>
 
 export default Party;
