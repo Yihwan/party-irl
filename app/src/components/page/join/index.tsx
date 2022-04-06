@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import Link from 'next/link';
+import { Loading, Text, Spacer } from '@nextui-org/react';
+import dayjs from 'dayjs';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+
+dayjs.extend(LocalizedFormat);
 
 import useSolana from 'src/hooks/useSolana';
+
 const Join = () => {
   const { program } = useSolana();
   const [parties, setParties] = useState(null);
-  console.log('parties', parties);
 
   useEffect(() => {
     async function fetchParties() {
@@ -25,16 +30,53 @@ const Join = () => {
     fetchParties();
   }, [program]);
 
+  if (!parties){
+    return <Loading />;
+  }
+
   return (
     <>
-      <div>
-        <div>JOIN!</div>
-        <WalletMultiButton />
-        <br />
-        <code>{JSON.stringify(parties, null, 4)}</code>
-      </div>
+      {parties.sort((a, b) => b.account.partyAt.toNumber() - a.account.partyAt.toNumber()).map((party, idx) => (
+        <>
+          <div key={`${party.account.name}-${idx}`}>
+            <Text h2>
+              <Link href={`/join/${party.publicKey}`}>
+                <a>
+                  {party.account.name}
+                </a>
+              </Link>
+            </Text>
+            <Text h4 i weight="normal">{getPartyStatusText({
+              partyAt: party.account.partyAt,
+              checkInEndsAt: party.account.checkInEndsAt,
+              maximumGuests: party.account.maximumGuests,
+              addedGuestsCount: party.account.addedGuestsCount,
+              checkedInGuestsCount: party.account.checkedInGuestsCount,
+            })}</Text>
+            <Text weight="medium" small transform='uppercase'>{dayjs(party.account.partyAt.toNumber() * 1000).format('LLL')}</Text>
+          </div>
+          <Spacer y={2} />
+        </>
+      ))}
     </>
   );
 };
+
+
+const getPartyStatusText = ({ partyAt, checkInEndsAt, maximumGuests, addedGuestsCount, checkedInGuestsCount }) => {
+  if (partyAt * 1000 > Date.now() && addedGuestsCount === maximumGuests) {
+    return `This party is full!`;
+  };
+
+  if (partyAt * 1000 > Date.now()) {
+    return `${maximumGuests - addedGuestsCount}/${maximumGuests} spots left.`;
+  };
+
+  if (Date.now() < checkInEndsAt * 1000) {
+    return `Check-in open.`
+  }
+
+  return `Check-in closed, ${checkedInGuestsCount}/${addedGuestsCount} guests checked in.`;
+}
 
 export default Join;

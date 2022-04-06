@@ -2,11 +2,6 @@ import { useEffect, useState } from 'react';
 import { PublicKey } from '@solana/web3.js';
 import useSolana from 'src/hooks/useSolana';
 import {
-  Container,
-  Grid,
-  Card,
-  Row,
-  Col,
   Text,
   Spacer,
   Loading
@@ -136,25 +131,5 @@ const Party = ({ partyAddress }) => {
     </>
   );
 };
-
-// <Grid.Container css={{
-//   padding: 0,
-// }}>
-//   <Grid xs={12} sm={8}>
-//     a
-//   </Grid>
-
-//   <Grid xs={12} sm={4}>
-//     <Card>
-//       <PartyAction
-//         partyAddress={partyAddress}
-//         partyData={partyData}
-//         guestPda={guestPda}
-//         guestData={guestData}
-//       />
-//     </Card>
-//   </Grid>
-
-// </Grid.Container>
 
 export default Party;
