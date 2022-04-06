@@ -2,8 +2,8 @@ import { FC, useState, useEffect } from 'react';
 import { Container } from '@nextui-org/react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useTheme as useNextTheme } from 'next-themes'
-import { useTheme } from '@nextui-org/react'
+import { useTheme as useNextTheme } from 'next-themes';
+import { useTheme } from '@nextui-org/react';
 
 const Nav: FC = () => {
   // from nextjs-breadcrumbs
@@ -31,7 +31,10 @@ const Nav: FC = () => {
       linkPath.shift();
 
       const pathArray = linkPath.map((path, i) => {
-        return { breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') };
+        return {
+          breadcrumb: path,
+          href: '/' + linkPath.slice(0, i + 1).join('/')
+        };
       });
 
       setBreadcrumbs(pathArray);
@@ -40,65 +43,72 @@ const Nav: FC = () => {
       window.removeEventListener('scroll', onScroll.bind(this));
     };
   }, [router]);
-  
+
   return (
     <div
       style={{
         borderBottom: hasScrolled ? '1px solid' : 'none',
         position: 'sticky',
-        top: 0, 
-        left: 0,
+        top: 0,
+        left: 0
       }}
     >
-      <Container 
+      <Container
         as="nav"
-        css={{ 
+        css={{
           fontSize: '18px',
           padding: '1rem',
           height: '56px',
           backgroundColor: '$background',
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center',
-      }}>
-          <div>
-            <Link href="/">
-              <a>
-                party<span style={{ fontWeight: 700 }}>IRL</span>
-              </a>
-            </Link>
+          alignItems: 'center'
+        }}
+      >
+        <div>
+          <Link href="/">
+            <a>
+              party<span style={{ fontWeight: 700 }}>IRL</span>
+            </a>
+          </Link>
 
-            {breadcrumbs && breadcrumbs.map(({ breadcrumb, href }, idx) => (
+          {breadcrumbs &&
+            breadcrumbs.map(({ breadcrumb, href }, idx) => (
               <span key={`${breadcrumb}-idx`}>
-                {href !== '/' && (
-                  <span style={{ padding: '0 0.5rem'}}>
-                    /
-                  </span>
-                )}
+                {href !== '/' && <span style={{ padding: '0 0.5rem' }}>/</span>}
                 <Link href={href}>
-                  <a style={{ fontWeight: idx === breadcrumbs.length - 1 ? 700 : 400}}>
-                    {breadcrumb.length > 20 ? `${breadcrumb.slice(0,4)}...${breadcrumb.slice(breadcrumb.length - 4, breadcrumb.length)}`: breadcrumb}
+                  <a
+                    style={{
+                      fontWeight: idx === breadcrumbs.length - 1 ? 700 : 400
+                    }}
+                  >
+                    {breadcrumb.length > 20
+                      ? `${breadcrumb.slice(0, 4)}...${breadcrumb.slice(
+                          breadcrumb.length - 4,
+                          breadcrumb.length
+                        )}`
+                      : breadcrumb}
                   </a>
                 </Link>
               </span>
             ))}
-          </div>
+        </div>
 
-          <div>
-            <button
-              style={{
-                fontSize: '24px',
-                padding: 0,
-                border: 0,
-                backgroundColor: 'transparent',
-                lineHeight: 1,
-                cursor: 'pointer',
-              }}
-              onClick={() => setTheme(isDark ? 'light' : 'dark')}
-            >
-              ◑
-            </button>
-          </div>
+        <div>
+          <button
+            style={{
+              fontSize: '24px',
+              padding: 0,
+              border: 0,
+              backgroundColor: 'transparent',
+              lineHeight: 1,
+              cursor: 'pointer'
+            }}
+            onClick={() => setTheme(isDark ? 'light' : 'dark')}
+          >
+            ◑
+          </button>
+        </div>
       </Container>
     </div>
   );

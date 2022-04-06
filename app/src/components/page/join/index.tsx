@@ -5,7 +5,7 @@ import useSolana from 'src/hooks/useSolana';
 const Join = () => {
   const { program } = useSolana();
   const [parties, setParties] = useState(null);
-  console.log('parties', parties)
+  console.log('parties', parties);
 
   useEffect(() => {
     async function fetchParties() {
@@ -18,25 +18,23 @@ const Join = () => {
         // @ts-ignore
         setParties(parties);
       } catch (e) {
-        console.log("initial fetch tx error: ", e);
+        console.log('initial fetch tx error: ', e);
       }
     }
 
     fetchParties();
   }, [program]);
 
-  return(
+  return (
     <>
       <div>
         <div>JOIN!</div>
         <WalletMultiButton />
         <br />
-        <code>
-          {JSON.stringify(parties, null, 4)}
-        </code>
+        <code>{JSON.stringify(parties, null, 4)}</code>
       </div>
     </>
   );
-}
+};
 
 export default Join;

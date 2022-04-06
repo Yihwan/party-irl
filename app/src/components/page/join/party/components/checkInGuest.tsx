@@ -16,27 +16,25 @@ const CheckInGuest = ({ partyData, partyAddress, guestPda }) => {
         party: partyAddress,
         guest: guestPda,
         guestAuthority: wallet.publicKey,
-        systemProgram: web3.SystemProgram.programId,
-      },
-    })
-  }
+        systemProgram: web3.SystemProgram.programId
+      }
+    });
+  };
 
   if (Date.now() < partyData.partyAt.toNumber() * 1000) {
-    return <h2>Check In is not open yet</h2>
+    return <h2>Check In is not open yet</h2>;
   }
 
   if (partyData.checkInEndsAt.toNumber() * 1000 < Date.now()) {
-    return <h2>Check In has closed :(</h2>
+    return <h2>Check In has closed :(</h2>;
   }
 
-  return(
+  return (
     <div>
       <h2>Check In Guest Flow</h2>
-      <button
-        onClick={addGuest}
-      >Check In Guest</button>
+      <button onClick={addGuest}>Check In Guest</button>
     </div>
   );
-}
+};
 
 export default CheckInGuest;

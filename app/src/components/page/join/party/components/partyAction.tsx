@@ -3,23 +3,40 @@ import CheckInGuest from './checkInGuest';
 import SettleGuest from './settleGuest';
 
 const PartyAction = ({ partyData, partyAddress, guestPda, guestData }) => {
-  console.log('partyData', partyData)
-  console.log('partyAddress', partyAddress)
-  console.log('guestPda', guestPda)
-  console.log('guestData', guestData)
+  console.log('partyData', partyData);
+  console.log('partyAddress', partyAddress);
+  console.log('guestPda', guestPda);
+  console.log('guestData', guestData);
 
   // Guest not added to party
   if (!guestData) {
-    return <AddGuest partyData={partyData} partyAddress={partyAddress} guestPda={guestPda} />
+    return (
+      <AddGuest
+        partyData={partyData}
+        partyAddress={partyAddress}
+        guestPda={guestPda}
+      />
+    );
   }
 
   // Guest added to party but has not checked in
   if (guestData && !guestData.hasCheckedIn) {
-    return <CheckInGuest partyData={partyData} partyAddress={partyAddress} guestPda={guestPda} />;
+    return (
+      <CheckInGuest
+        partyData={partyData}
+        partyAddress={partyAddress}
+        guestPda={guestPda}
+      />
+    );
   }
 
-  return(
-    <SettleGuest partyData={partyData} partyAddress={partyAddress} guestPda={guestPda} guestData={guestData} />
+  return (
+    <SettleGuest
+      partyData={partyData}
+      partyAddress={partyAddress}
+      guestPda={guestPda}
+      guestData={guestData}
+    />
   );
 };
 

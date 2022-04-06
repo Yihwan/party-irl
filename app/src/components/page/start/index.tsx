@@ -39,23 +39,23 @@ const Start = () => {
           accounts: {
             party: party.publicKey,
             creator: wallet.publicKey,
-            systemProgram: web3.SystemProgram.programId,
+            systemProgram: web3.SystemProgram.programId
           },
-          signers: [party],
+          signers: [party]
         }
-      )
+      );
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   if (!wallet) {
-    return(
+    return (
       <>
         <div>Connect your wallet to start a party.</div>
         <WalletMultiButton />
       </>
-    )
+    );
   }
 
   return (
@@ -65,48 +65,48 @@ const Start = () => {
 
       <h1>Test Form</h1>
       <form onSubmit={createParty}>
-        <Grid.Container gap={4} direction='column'>
-          <Input 
+        <Grid.Container gap={4} direction="column">
+          <Input
             required
             type="text"
             maxLength={64}
-            underlined 
-            labelPlaceholder="party name" 
+            underlined
+            labelPlaceholder="party name"
             value={name}
             onChange={(event) => setName(event.target.value)}
           />
           <Spacer y={2} />
-          <Input 
+          <Input
             required
-            underlined 
+            underlined
             type="date"
-            label="party_at (date)" 
+            label="party_at (date)"
             value={partyAtDate}
             onChange={(event) => setPartyAtDate(event.target.value)}
           />
           <Spacer y={2} />
-          <Input 
+          <Input
             required
-            underlined 
+            underlined
             type="time"
-            label="party_at (time)" 
+            label="party_at (time)"
             value={partyAtTime}
             onChange={(event) => setPartyAtTime(event.target.value)}
           />
           <Spacer y={2} />
-          <Input 
+          <Input
             required
-            underlined 
+            underlined
             type="number"
             min={5}
-            labelPlaceholder="check_in_duration (minutes)" 
+            labelPlaceholder="check_in_duration (minutes)"
             helperText="Minimum: 5 minutes"
             value={checkInDuration}
             onChange={(event) => setCheckInDuration(event.target.value)}
           />
           <Spacer y={2} />
-          <Input 
-            underlined 
+          <Input
+            underlined
             type="number"
             step={0.1}
             inputMode="decimal"
@@ -117,19 +117,17 @@ const Start = () => {
             onChange={(event) => setStakeInSol(event.target.value)}
           />
           <Spacer y={2} />
-          <Input 
-            underlined 
+          <Input
+            underlined
             type="number"
             min={1}
-            labelPlaceholder="max_guests" 
+            labelPlaceholder="max_guests"
             helperText="Optional"
             value={maximumGuests}
             onChange={(event) => setMaximumGuests(event.target.value)}
           />
           <Spacer y={2} />
-          <Input 
-            type="submit"
-          />
+          <Input type="submit" />
         </Grid.Container>
       </form>
     </div>

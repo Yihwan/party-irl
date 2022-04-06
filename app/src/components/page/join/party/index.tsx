@@ -1,7 +1,16 @@
-import { useEffect, useState } from "react";
-import { PublicKey } from "@solana/web3.js";
+import { useEffect, useState } from 'react';
+import { PublicKey } from '@solana/web3.js';
 import useSolana from 'src/hooks/useSolana';
-import { Container, Grid, Card, Row, Col, Text, Spacer, Loading } from '@nextui-org/react';
+import {
+  Container,
+  Grid,
+  Card,
+  Row,
+  Col,
+  Text,
+  Spacer,
+  Loading
+} from '@nextui-org/react';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 
@@ -17,7 +26,7 @@ const Party = ({ partyAddress }) => {
 
   /**
    * if guest+party does not exist, render ADD GUEST flow
-   * if guest+party pda exists, render CHECK IN flow 
+   * if guest+party pda exists, render CHECK IN flow
    */
 
   useEffect(() => {
@@ -38,8 +47,8 @@ const Party = ({ partyAddress }) => {
 
         const [guestPda, bump] = await PublicKey.findProgramAddress(
           ['guest', partyPublicKey.toBytes(), wallet.publicKey.toBytes()],
-          program.programId,
-        )
+          program.programId
+        );
 
         setGuestPda(guestPda);
 
@@ -47,13 +56,11 @@ const Party = ({ partyAddress }) => {
           const guestData = await program.account.guest.fetch(guestPda);
 
           setGuestData(guestData);
-        } catch(error) {
+        } catch (error) {
           console.log(error);
         }
-        
-        
       } catch (e) {
-        console.log("error: ", e);
+        console.log('error: ', e);
         return;
       }
     }
@@ -65,47 +72,89 @@ const Party = ({ partyAddress }) => {
     return <Loading />;
   }
 
-  const { name, partyAt, creator, checkInEndsAt, stakeInLamports, maximumGuests, addedGuestsCount, checkedInGuestsCount } = partyData;
+  const {
+    name,
+    partyAt,
+    creator,
+    checkInEndsAt,
+    stakeInLamports,
+    maximumGuests,
+    addedGuestsCount,
+    checkedInGuestsCount
+  } = partyData;
 
-  console.log(partyData)
+  console.log(partyData);
 
-  const createdBy = `${creator.toBase58().slice(0,5)}...${creator.toBase58().slice(creator.toBase58().length - 4, creator.toBase58().length)}`;
+  const createdBy = `${creator.toBase58().slice(0, 5)}...${creator
+    .toBase58()
+    .slice(creator.toBase58().length - 4, creator.toBase58().length)}`;
 
-  return(
+  return (
     <>
       <Text h1>{name}</Text>
-      <Spacer y={1}/>
-      <Text h4 i>created_by: <a target="_blank" rel="noopener noreferrer" href={`https://explorer.solana.com/address/${creator.toBase58()}?cluster=devnet`} style={{ fontWeight: 400 }}>
-        {createdBy}</a>
+      <Spacer y={1} />
+      <Text h4 i>
+        created_by:{' '}
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={`https://explorer.solana.com/address/${creator.toBase58()}?cluster=devnet`}
+          style={{ fontWeight: 400 }}
+        >
+          {createdBy}
+        </a>
       </Text>
-      <Text h4 i>party_at: <span style={{ fontWeight: 400 }}>{dayjs(partyAt.toNumber() * 1000).format('LLL')}</span></Text>
-      <Text h4 i>check_in_ends_at: <span style={{ fontWeight: 400 }}>{dayjs(checkInEndsAt.toNumber() * 1000).format('LLL')}</span></Text>
-      <Text h4 i>stake_in_sol: <span style={{ fontWeight: 400 }}>{stakeInLamports / 1_000_000_000}</span></Text>
-      <Text h4 i>maximum_guests: <span style={{ fontWeight: 400 }}>{maximumGuests}</span></Text>
-      <Text h4 i>added_guests_count: <span style={{ fontWeight: 400 }}>{addedGuestsCount}</span></Text>
-      <Text h4 i>checked_in_guests_count: <span style={{ fontWeight: 400 }}>{checkedInGuestsCount}</span></Text>
+      <Text h4 i>
+        party_at:{' '}
+        <span style={{ fontWeight: 400 }}>
+          {dayjs(partyAt.toNumber() * 1000).format('LLL')}
+        </span>
+      </Text>
+      <Text h4 i>
+        check_in_ends_at:{' '}
+        <span style={{ fontWeight: 400 }}>
+          {dayjs(checkInEndsAt.toNumber() * 1000).format('LLL')}
+        </span>
+      </Text>
+      <Text h4 i>
+        stake_in_sol:{' '}
+        <span style={{ fontWeight: 400 }}>
+          {stakeInLamports / 1_000_000_000}
+        </span>
+      </Text>
+      <Text h4 i>
+        maximum_guests: <span style={{ fontWeight: 400 }}>{maximumGuests}</span>
+      </Text>
+      <Text h4 i>
+        added_guests_count:{' '}
+        <span style={{ fontWeight: 400 }}>{addedGuestsCount}</span>
+      </Text>
+      <Text h4 i>
+        checked_in_guests_count:{' '}
+        <span style={{ fontWeight: 400 }}>{checkedInGuestsCount}</span>
+      </Text>
     </>
-  )
+  );
 };
 
-    // <Grid.Container css={{
-    //   padding: 0,
-    // }}>
-    //   <Grid xs={12} sm={8}>
-    //     a
-    //   </Grid>
+// <Grid.Container css={{
+//   padding: 0,
+// }}>
+//   <Grid xs={12} sm={8}>
+//     a
+//   </Grid>
 
-    //   <Grid xs={12} sm={4}>
-    //     <Card>
-    //       <PartyAction 
-    //         partyAddress={partyAddress} 
-    //         partyData={partyData}
-    //         guestPda={guestPda}
-    //         guestData={guestData}
-    //       />
-    //     </Card>
-    //   </Grid>
+//   <Grid xs={12} sm={4}>
+//     <Card>
+//       <PartyAction
+//         partyAddress={partyAddress}
+//         partyData={partyData}
+//         guestPda={guestPda}
+//         guestData={guestData}
+//       />
+//     </Card>
+//   </Grid>
 
-    // </Grid.Container>
+// </Grid.Container>
 
 export default Party;
