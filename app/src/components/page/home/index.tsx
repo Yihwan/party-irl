@@ -1,23 +1,20 @@
-import { Container, Text } from '@nextui-org/react';
+import Link from 'next/link';
+import { Text, Spacer } from '@nextui-org/react';
 
 const Home = () => {
 
   return(
-    <Container css={{
-      padding: 0,
-      display: 'flex',
-      flexWrap: 'no-wrap',
-      flexDirection: 'column',
-      '@xs': {
-        flexDirection: 'row',
-      }
-    }}>
-      <Container>a</Container>
-      <Container>
-        <Text h1 css={{ fontWeight: 'unset'}}>party<span style={{ fontWeight: 700}}>IRL</span></Text>
-        <Text css={{ fontWeight: 400 }}>Built on Solana, just for fun.</Text>
-      </Container>
-    </Container>
+    <>
+      <Text h1 css={{ fontWeight: 'unset'}}>party<span style={{ fontWeight: 700}}>IRL</span> 🎉</Text>
+      <Text h4 css={{ fontWeight: 400 }}>Built on Solana, just for fun.</Text>
+
+      <Spacer y={2} />
+
+      <Link href="/join">join</Link>
+
+      <Spacer y={1} />
+      <Link href="/start">start</Link>
+    </>
   );
 }
 
