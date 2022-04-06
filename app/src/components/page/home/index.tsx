@@ -33,16 +33,20 @@ const Home = () => {
       <Spacer y={3} />
 
       <Text h3>How it (should) work:</Text>
-      <Container>
-        <ol>
-          <li>Join or start a party.</li>
-          <li>(If you start a party, you still have to "join" separately because blockchain stuff.)</li>
-          <li>Stake some SOL to join a party.</li>
-          <li>When party time rolls around, check-in.</li>
-          <li>You get your SOL back, plus the SOL from no-shows.</li>
-          <li>Pretty cool, huh?</li>
-        </ol>
-      </Container>
+
+      <ol style={{ maxWidth: '700px' }}>
+        <Text as="li" size={18}>Join or start a party.</Text>
+        <Text as="li" size={18}>(If you start a party, you still have to "join" separately because blockchain stuff.)</Text>
+        <Text as="li" size={18}>Stake some SOL to join a party.</Text>
+        <Text as="li" size={18}>When party time rolls around, check-in.</Text>
+        <Text as="li" size={18}>You get your SOL back, plus some SOL from people who didn't check-in.</Text>
+      </ol>
+
+      <Spacer y={1} />
+
+      <Text weight="normal" size={18} css={{ fontFamily: 'Space Mono', maxWidth: '700px' }}>
+        I hacked this together over a few days, mostly at the Miami Hacker House. It was fun. I learned a lot, met some great people. While party<b>IRL</b> shouldn't be deployed to mainnet (the code's a mess, and you'll probably lose all your money), it helped me realize chewing glass wasn't so bad after all. I call that a win.
+      </Text>
     </>
   );
 };
