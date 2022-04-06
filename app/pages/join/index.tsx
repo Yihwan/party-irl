@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 
 import Join from 'src/components/page/join';
+import Layout from 'src/components/layout';
 
 const JoinPage: NextPage = () => {
   return (
@@ -12,7 +13,9 @@ const JoinPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Join />
+      <Layout>
+        <Join />
+      </Layout>
     </div>
   );
 };
