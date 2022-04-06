@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
 import useSolana from 'src/hooks/useSolana';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { web3 } from '@project-serum/anchor';
 
-const SettleGuest = ({ partyData, partyAddress, guestPda }) => {
+const SettleGuest = ({ partyData, partyAddress, guestPda, guestData }) => {
   const { wallet, program } = useSolana();
 
+
+  console.log(guestData)
   const settleGuest = async () => {
     if (!program || !wallet) {
       return;
@@ -18,7 +18,11 @@ const SettleGuest = ({ partyData, partyAddress, guestPda }) => {
         guestAuthority: wallet.publicKey,
         systemProgram: web3.SystemProgram.programId,
       },
-    })
+    });
+  }
+
+  if (guestData.hasSettledStake) {
+    return <h2>You have already settled!</h2>;
   }
 
   return(

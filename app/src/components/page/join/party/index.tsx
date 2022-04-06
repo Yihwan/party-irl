@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
 import { PublicKey } from "@solana/web3.js";
 import useSolana from 'src/hooks/useSolana';
-import { web3 } from '@project-serum/anchor';
 
-import AddGuest from './components/addGuest';
-import CheckInGuest from './components/checkInGuest';
-import SettleGuest from './components/settleGuest';
+import PartyAction from './components/partyAction';
 
 const Party = ({ partyAddress }) => {
   const { program, wallet } = useSolana();
-  const [party, setParty] = useState(null);
+  const [partyData, setPartyData] = useState(null);
   const [guestPda, setGuestPda] = useState(null);
-  const [guestAccount, setGuestAccount] = useState(null);
-
-  console.log('guestAccount', guestAccount);
+  const [guestData, setGuestData] = useState(null);
 
   /**
    * if guest+party does not exist, render ADD GUEST flow
@@ -28,11 +23,11 @@ const Party = ({ partyAddress }) => {
 
       try {
         const partyPublicKey = new PublicKey(partyAddress);
-        const party = await program.account.party.fetch(partyPublicKey);
+        const partyData = await program.account.party.fetch(partyPublicKey);
         // @ts-ignore
-        setParty(party);
+        setPartyData(partyData);
 
-        if (!wallet || !party) {
+        if (!wallet || !partyData) {
           return;
         }
 
@@ -44,10 +39,9 @@ const Party = ({ partyAddress }) => {
         setGuestPda(guestPda);
 
         try {
-          const guestAccount = await program.account.guest.fetch(guestPda);
-          console.log('guestAccount', guestAccount)
+          const guestData = await program.account.guest.fetch(guestPda);
 
-          setGuestAccount(guestAccount);
+          setGuestData(guestData);
         } catch(error) {
           console.log(error);
         }
@@ -62,21 +56,18 @@ const Party = ({ partyAddress }) => {
     fetchPartyData();
   }, [program, partyAddress]);
 
-  if (guestAccount && guestAccount.hasCheckedIn) {
-    return <SettleGuest partyData={party} partyAddress={partyAddress} guestPda={guestPda} />
-  }
-
   return(
     <>
       <div>Party: {partyAddress}</div>
       <code>
-        {JSON.stringify(party, null, 4)}
+        {JSON.stringify(partyData, null, 4)}
       </code>
-      {guestAccount ? (
-        <CheckInGuest partyData={party} partyAddress={partyAddress} guestPda={guestPda} />
-      ) : (
-        <AddGuest party={party} partyAddress={partyAddress} guestPda={guestPda} />
-      )}
+      <PartyAction 
+        partyAddress={partyAddress} 
+        partyData={partyData}
+        guestPda={guestPda}
+        guestData={guestData}
+      />
     </>
   )
 };

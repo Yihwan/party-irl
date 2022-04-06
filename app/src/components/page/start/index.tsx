@@ -27,8 +27,6 @@ const Start = () => {
     const partyAtUnix = date.unix();
     const checkInEndsAtUnix = checkInDate.unix();
 
-
-    console.log('partyAtUnix', partyAtUnix);
     await program.rpc.createParty(
       name,
       new BN(Number(maximumGuests)),

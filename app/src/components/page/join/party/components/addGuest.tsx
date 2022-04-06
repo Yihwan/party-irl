@@ -4,9 +4,8 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { PublicKey } from "@solana/web3.js";
 import { web3 } from '@project-serum/anchor';
 
-const AddGuest = ({ party, partyAddress, guestPda }) => {
+const AddGuest = ({ partyData, partyAddress, guestPda }) => {
   const { wallet, program } = useSolana(); 
-  // console.log('wallet', wallet.publicKey)
 
   const addGuest = async () => {
     if (!program || !wallet) {
