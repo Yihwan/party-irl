@@ -46,7 +46,7 @@ const AddGuest = ({ partyData, partyAddress, guestPda }) => {
       )}
       <Spacer y={1} />
       {wallet && (
-        <Button size="lg" color="success" onClick={addGuest}>Join {partyData.name}</Button>
+        <Button size="lg" color="success" onClick={addGuest}>Join {partyData.name.length > 24 ? 'this party' : partyData.name}</Button>
       )}
     </>
   );
