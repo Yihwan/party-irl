@@ -4,6 +4,7 @@ import useSolana from 'src/hooks/useSolana';
 import { Text, Spacer, Loading } from '@nextui-org/react';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 dayjs.extend(LocalizedFormat);
 
@@ -134,12 +135,23 @@ const Party = ({ partyAddress }) => {
 
       <Spacer y={3} />
 
-      <PartyAction 
-        partyData={partyData}
-        partyAddress={partyAddress}
-        guestPda={guestPda}
-        guestData={guestData}
-      />
+      <WalletMultiButton />
+      <Spacer y={0.5} />
+      {!wallet && (
+        <Text css={{ fontFamily: 'Space Mono' }} small>
+          Connect your wallet (Devnet) to unlock party actions.
+        </Text>
+      )}
+      <Spacer y={2} />
+
+      {wallet && (
+        <PartyAction 
+          partyData={partyData}
+          partyAddress={partyAddress}
+          guestPda={guestPda}
+          guestData={guestData}
+        />
+      )}
     </>
   );
 };

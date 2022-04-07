@@ -1,39 +1,67 @@
 import dayjs from 'dayjs';
 import useSolana from 'src/hooks/useSolana';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { web3 } from '@project-serum/anchor';
+import { Text, Button, Spacer } from '@nextui-org/react';
+
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+dayjs.extend(LocalizedFormat);
 
 const CheckInGuest = ({ partyData, partyAddress, guestPda }) => {
   const { wallet, program } = useSolana();
+  const { partyAt, checkInEndsAt } = partyData;
 
-  const addGuest = async () => {
+  const checkInGuest = async () => {
     if (!program || !wallet) {
       return;
     }
 
-    await program.rpc.checkInGuest({
-      accounts: {
-        party: partyAddress,
-        guest: guestPda,
-        guestAuthority: wallet.publicKey,
-        systemProgram: web3.SystemProgram.programId
-      }
-    });
+    try {
+      await program.rpc.checkInGuest({
+        accounts: {
+          party: partyAddress,
+          guest: guestPda,
+          guestAuthority: wallet.publicKey,
+          systemProgram: web3.SystemProgram.programId
+        }
+      });
+    } catch(error) {
+      console.error(error);
+    }
   };
 
+  const partyAtDayJs = dayjs(partyAt.toNumber() * 1000);
+  const checkInEndsAtDayJs = dayjs(checkInEndsAt.toNumber() * 1000);
+
   if (Date.now() < partyData.partyAt.toNumber() * 1000) {
-    return <h2>Check In is not open yet</h2>;
+    return ( 
+      <>
+        <Text h2>You're on the list!</Text>
+        <Text css={{ fontFamily: 'Space Mono' }} size={18}>
+          Don't forget to check-in at {partyAtDayJs.format('LT')} on {partyAtDayJs.format('LL')}.<br />
+          Check-in closes at {checkInEndsAtDayJs.format('LT')} on {checkInEndsAtDayJs.format('LL')}.
+        </Text>
+      </>
+    );
   }
 
   if (partyData.checkInEndsAt.toNumber() * 1000 < Date.now()) {
-    return <h2>Check In has closed :(</h2>;
+    return (
+      <>
+        <Text h2>Check-in has closed. :(</Text>
+        <Text css={{ fontFamily: 'Space Mono' }} size={18}>
+          Good thing this is on Devnet! This <Text i>is</Text> on Devnet ... right?
+        </Text>
+      </>
+    );
   }
 
   return (
-    <div>
-      <h2>Check In Guest Flow</h2>
-      <button onClick={addGuest}>Check In Guest</button>
-    </div>
+    <>
+      <Text h2>It's time to check-in!</Text>
+      <Spacer y={1} />
+
+      <Button size="lg" color="success" onClick={checkInGuest}>Check-in</Button>
+    </>
   );
 };
 
