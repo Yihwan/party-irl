@@ -17,6 +17,7 @@ pub mod party_irl {
         let party: &mut Account<Party> = &mut ctx.accounts.party;
         let creator: &Signer = &ctx.accounts.creator;
         let clock: Clock = Clock::get().unwrap();
+        msg!("{:?}", party_at);
 
         // Validations 
         if name.chars().count() > 64 {
@@ -257,20 +258,20 @@ impl Guest {
 
 #[error_code]
 pub enum ErrorCode {
-    #[msg("Party name can't be longer than 64 characters.")]
+    #[msg("Party name can't be longer than 64 characters")]
     PartyNameTooLong,
-    #[msg("Party start time can't be in the past.")]
+    #[msg("Party start time can't be in the past")]
     PartyAtInThePast,
-    #[msg("Party is full.")]
+    #[msg("Party is full")]
     PartyFull,
-    #[msg("Check-in time must be longer than 5 minutes.")]
+    #[msg("Check-in time must be longer than 5 minutes")]
     CheckInTimeTooShort,
-    #[msg("Check-in is not open.")]
+    #[msg("Check-in is not open")]
     CheckInNotOpen,
-    #[msg("You have already checked-in.")]
+    #[msg("You have already checked-in")]
     AlreadyCheckedIn,
-    #[msg("Check-in is still open.")]
+    #[msg("Check-in is still open")]
     TooEarlyToSettle,
-    #[msg("You cannot settle.")]
+    #[msg("You cannot settle")]
     CannotSettle,
 }
