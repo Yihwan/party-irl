@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useTheme as useNextTheme } from 'next-themes';
 import { useTheme } from '@nextui-org/react';
 
+import { shortenString } from 'src/utils';
+
 const Nav: FC = () => {
   // from nextjs-breadcrumbs
   const router = useRouter();
@@ -83,10 +85,7 @@ const Nav: FC = () => {
                     }}
                   >
                     {breadcrumb.length > 20
-                      ? `${breadcrumb.slice(0, 4)}...${breadcrumb.slice(
-                          breadcrumb.length - 4,
-                          breadcrumb.length
-                        )}`
+                      ? shortenString(breadcrumb)
                       : breadcrumb}
                   </a>
                 </Link>

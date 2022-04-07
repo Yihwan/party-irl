@@ -1,12 +1,14 @@
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { web3, BN } from '@project-serum/anchor';
-import { Input, Grid, Spacer } from '@nextui-org/react';
+import { Input, Spacer, Text, Button } from '@nextui-org/react';
 import { useState } from 'react';
 import useSolana from 'src/hooks/useSolana';
-import dayjs from 'dayjs';
+import dayjs from 'dayjs'
+import { useRouter } from 'next/router';
 
 const Start = () => {
   const { wallet, program } = useSolana();
+  const router = useRouter();
   const [name, setName] = useState('');
   const [partyAtDate, setPartyAtDate] = useState('');
   const [partyAtTime, setPartyAtTime] = useState('');
@@ -44,93 +46,106 @@ const Start = () => {
           signers: [party]
         }
       );
+
+      router.push('/join');
     } catch (error) {
       console.error(error);
     }
   };
 
-  if (!wallet) {
-    return (
-      <>
-        <div>Connect your wallet to start a party.</div>
-        <WalletMultiButton />
-      </>
-    );
-  }
-
   return (
-    <div>
-      <div>Wallet connected</div>
-      <WalletMultiButton />
+    <>
+      <Text h1 css={{ textGradient: '45deg, $blue500 -20%, $pink500 50%' }}>
+        Start a party
+      </Text>
 
-      <h1>Test Form</h1>
-      <form onSubmit={createParty}>
-        <Grid.Container gap={4} direction="column">
+      <Spacer y={2} />
+
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <WalletMultiButton />
+        <Spacer y={0.5} />
+        {!wallet && (
+          <Text css={{ fontFamily: 'Space Mono' }} small>
+            Connect your wallet (Devnet) to start a party.
+          </Text>
+        )}
+      </div>
+
+      {wallet && (
+        <ul style={{ maxWidth: '700px', listStyle: 'disc' }}>
+          <Text as="li" size={18}>
+            Required fields: `party_name`{' '}
+          </Text>
+          <Text as="li" size={18}>
+            (If you start a party, you still have to "join" separately because
+            blockchain stuff.)
+          </Text>
+          <Text as="li" size={18}>
+            Stake some SOL to join a party.
+          </Text>
+        </ul>
+      )}
+
+      <Spacer y={2} />
+
+      {wallet && (
+        <form onSubmit={createParty} style={{ maxWidth: '400px', display: 'flex', flexDirection: 'column' }}>
           <Input
             required
             type="text"
             maxLength={64}
-            underlined
-            labelPlaceholder="party name"
+            label="party_name"
             value={name}
             onChange={(event) => setName(event.target.value)}
           />
-          <Spacer y={2} />
+          <Spacer y={1} />
           <Input
             required
-            underlined
             type="date"
             label="party_at (date)"
             value={partyAtDate}
             onChange={(event) => setPartyAtDate(event.target.value)}
           />
-          <Spacer y={2} />
+          <Spacer y={1} />
           <Input
             required
-            underlined
             type="time"
             label="party_at (time)"
             value={partyAtTime}
             onChange={(event) => setPartyAtTime(event.target.value)}
           />
-          <Spacer y={2} />
+          <Spacer y={1} />
           <Input
             required
-            underlined
             type="number"
             min={5}
-            labelPlaceholder="check_in_duration (minutes)"
-            helperText="Minimum: 5 minutes"
+            label="check_in_duration (minutes)"
             value={checkInDuration}
             onChange={(event) => setCheckInDuration(event.target.value)}
           />
-          <Spacer y={2} />
+          <Spacer y={1} />
           <Input
-            underlined
             type="number"
             step={0.1}
             inputMode="decimal"
             min={0}
-            labelPlaceholder="stake_in_sol"
-            helperText="Optional"
+            label="stake_in_sol"
             value={stakeInSol}
             onChange={(event) => setStakeInSol(event.target.value)}
           />
-          <Spacer y={2} />
+          <Spacer y={1} />
           <Input
-            underlined
             type="number"
             min={1}
-            labelPlaceholder="max_guests"
-            helperText="Optional"
+            label="max_guests"
             value={maximumGuests}
             onChange={(event) => setMaximumGuests(event.target.value)}
           />
           <Spacer y={2} />
-          <Input type="submit" />
-        </Grid.Container>
-      </form>
-    </div>
+          <Input status="success" type="submit" />
+        </form>
+      )}
+    </>
   );
 };
 

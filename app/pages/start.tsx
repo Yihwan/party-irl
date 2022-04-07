@@ -15,29 +15,6 @@ const StartPage: NextPage = () => {
 
       <Layout>
         <Start />
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
-        <h2>TEXT </h2>
       </Layout>
     </>
   );

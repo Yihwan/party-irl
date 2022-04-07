@@ -1,7 +1,7 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { NextUIProvider, createTheme, globalCss } from '@nextui-org/react';
+import { NextUIProvider, createTheme } from '@nextui-org/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 
 import WalletContext from 'src/contexts/wallet';
