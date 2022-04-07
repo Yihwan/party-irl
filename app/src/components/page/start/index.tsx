@@ -10,8 +10,8 @@ const Start = () => {
   const { wallet, program } = useSolana();
   const router = useRouter();
   const [name, setName] = useState('');
-  const [partyAtDate, setPartyAtDate] = useState('');
-  const [partyAtTime, setPartyAtTime] = useState('');
+  const [partyAtDate, setPartyAtDate] = useState(dayjs().add(1,'day').format('YYYY-MM-DD'));
+  const [partyAtTime, setPartyAtTime] = useState('12:00');
   const [checkInDuration, setCheckInDuration] = useState('15');
   const [stakeInSol, setStakeInSol] = useState('0');
   const [maximumGuests, setMaximumGuests] = useState('10');
@@ -81,7 +81,7 @@ const Start = () => {
             blockchain stuff.)
           </Text>
           <Text as="li" size={18}>
-            Stake some SOL to join a party.
+            More helper text
           </Text>
         </ul>
       )}
