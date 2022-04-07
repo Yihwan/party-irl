@@ -10,14 +10,18 @@ const SettleGuest = ({ partyData, partyAddress, guestPda, guestData }) => {
       return;
     }
 
-    await program.rpc.settleGuest({
-      accounts: {
-        party: partyAddress,
-        guest: guestPda,
-        guestAuthority: wallet.publicKey,
-        systemProgram: web3.SystemProgram.programId
-      }
-    });
+    try {
+      await program.rpc.settleGuest({
+        accounts: {
+          party: partyAddress,
+          guest: guestPda,
+          guestAuthority: wallet.publicKey,
+          systemProgram: web3.SystemProgram.programId
+        }
+      });
+    } catch(error) {
+      console.error(error);
+    }
   };
 
   if (guestData.hasSettledStake) {

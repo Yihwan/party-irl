@@ -26,10 +26,15 @@ const Start = () => {
     const party = web3.Keypair.generate();
     const date = dayjs(`${partyAtDate}T${partyAtTime}`);
     const checkInDate = date.add(Number(checkInDuration), 'minutes');
-
+    
     const partyAtUnix = date.unix();
     const checkInEndsAtUnix = checkInDate.unix();
 
+    // idk why validation against solana clock doesn't work
+    if (partyAtUnix * 1000 < Date.now()) {
+      return;
+    }
+    
     try {
       await program.rpc.createParty(
         name,
@@ -107,6 +112,7 @@ const Start = () => {
             label="party_at (date)"
             value={partyAtDate}
             onChange={(event) => setPartyAtDate(event.target.value)}
+            min={dayjs().format('YYYY-MM-DD')}
           />
           <Spacer y={1} />
           <Input
