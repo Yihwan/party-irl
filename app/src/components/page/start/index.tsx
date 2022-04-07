@@ -74,14 +74,16 @@ const Start = () => {
       {wallet && (
         <ul style={{ maxWidth: '700px', listStyle: 'disc' }}>
           <Text as="li" size={18}>
-            Required fields: `party_name`{' '}
+            Required: `party_name`, `party_at` (date and time), `check_in_duration` (min: 5 minutes), max_guests.
           </Text>
           <Text as="li" size={18}>
-            (If you start a party, you still have to "join" separately because
-            blockchain stuff.)
+            Optional: `stake_in_sol`. This is how much guests need to "stake" in order to get added to party. You get your stake back after you check-in (you lose it if you don't).
           </Text>
           <Text as="li" size={18}>
-            More helper text
+            You have to add yourself as a guest after creating a party for now. Maybe I'll re-architect this some day.
+          </Text>
+          <Text as="li" size={18}>
+            After creating a party, you'll be re-directed to /join. Wait a couple seconds and refresh the page to see and join your party. (sns this was a hackathon project)
           </Text>
         </ul>
       )}
@@ -126,20 +128,20 @@ const Start = () => {
           <Spacer y={1} />
           <Input
             type="number"
+            min={1}
+            label="max_guests"
+            value={maximumGuests}
+            onChange={(event) => setMaximumGuests(event.target.value)}
+          />
+          <Spacer y={1} />
+          <Input
+            type="number"
             step={0.1}
             inputMode="decimal"
             min={0}
             label="stake_in_sol"
             value={stakeInSol}
             onChange={(event) => setStakeInSol(event.target.value)}
-          />
-          <Spacer y={1} />
-          <Input
-            type="number"
-            min={1}
-            label="max_guests"
-            value={maximumGuests}
-            onChange={(event) => setMaximumGuests(event.target.value)}
           />
           <Spacer y={2} />
           <Input status="success" type="submit" />

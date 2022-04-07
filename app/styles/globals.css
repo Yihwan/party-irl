@@ -24,3 +24,7 @@ a {
   );
   font-family: 'Space Mono' !important;
 }
+
+.wallet-adapter-dropdown-list {
+  z-index: 201 !important;
+}

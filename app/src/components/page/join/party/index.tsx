@@ -76,13 +76,20 @@ const Party = ({ partyAddress }) => {
     checkedInGuestsCount
   } = partyData;
 
-  console.log(partyData);
-
   return (
     <>
       <Text h1 css={{ textGradient: '45deg, $blue500 -20%, $pink500 50%' }}>
         {name}
       </Text>
+      
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={`https://explorer.solana.com/address/${partyAddress}?cluster=devnet`}
+          style={{ fontWeight: 400 }}
+        >
+          <Text h4>{partyAddress}</Text>
+        </a>
       <Spacer y={2} />
       <Text h4 i>
         created_by:{' '}
@@ -124,6 +131,15 @@ const Party = ({ partyAddress }) => {
         checked_in_guests_count:{' '}
         <span style={{ fontWeight: 400 }}>{checkedInGuestsCount}</span>
       </Text>
+
+      <Spacer y={3} />
+
+      <PartyAction 
+        partyData={partyData}
+        partyAddress={partyAddress}
+        guestPda={guestPda}
+        guestData={guestData}
+      />
     </>
   );
 };
