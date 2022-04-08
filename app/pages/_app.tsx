@@ -15,6 +15,7 @@ const darkTheme = createTheme({
   type: 'dark'
 });
 
+// @ts-ignore
 const ErrorFallback = ({ error }) => {
   return (
     <Layout>
