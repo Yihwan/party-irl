@@ -12,7 +12,7 @@ const Home = () => {
         party<span style={{ fontWeight: 700 }}>IRL</span>
       </Text>
       <Text h4 weight="normal">
-        Built on Solana, just for fun. 🎉
+        Built on Solana, just for fun. 🎈
       </Text>
 
       <Spacer y={2} />
@@ -42,11 +42,8 @@ const Home = () => {
 
       <ol style={{ maxWidth: '700px' }}>
         <Text as="li" size={18}>
-          Join or start a party.
-        </Text>
-        <Text as="li" size={18}>
-          (If you start a party, you still have to "join" separately because
-          blockchain stuff.)
+          <Link href="/join">Join</Link> or <Link href="/start">start</Link> a
+          party.
         </Text>
         <Text as="li" size={18}>
           Stake some SOL to join a party.
@@ -55,8 +52,8 @@ const Home = () => {
           When party time rolls around, check-in.
         </Text>
         <Text as="li" size={18}>
-          You get your SOL back, plus any SOL from people who didn't check-in on
-          time.
+          Settle to get your SOL back, plus any SOL from people who didn't
+          check-in on time.
         </Text>
       </ol>
 

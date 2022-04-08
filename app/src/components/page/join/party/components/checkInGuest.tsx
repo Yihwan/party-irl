@@ -28,7 +28,7 @@ const CheckInGuest = ({ partyData, partyAddress, guestPda }) => {
       });
 
       router.reload();
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
   };
@@ -37,12 +37,14 @@ const CheckInGuest = ({ partyData, partyAddress, guestPda }) => {
   const checkInEndsAtDayJs = dayjs(checkInEndsAt.toNumber() * 1000);
 
   if (Date.now() < partyData.partyAt.toNumber() * 1000) {
-    return ( 
+    return (
       <>
         <Text h2>You're on the list!</Text>
         <Text css={{ fontFamily: 'Space Mono' }} size={18}>
-          Don't forget to check-in at {partyAtDayJs.format('LT')} on {partyAtDayJs.format('LL')}.<br />
-          Check-in closes at {checkInEndsAtDayJs.format('LT')} on {checkInEndsAtDayJs.format('LL')}.
+          Don't forget to check-in at {partyAtDayJs.format('LT')} on{' '}
+          {partyAtDayJs.format('LL')}.<br />
+          Check-in closes at {checkInEndsAtDayJs.format('LT')} on{' '}
+          {checkInEndsAtDayJs.format('LL')}.
         </Text>
       </>
     );
@@ -53,7 +55,8 @@ const CheckInGuest = ({ partyData, partyAddress, guestPda }) => {
       <>
         <Text h2>Check-in has closed. :(</Text>
         <Text css={{ fontFamily: 'Space Mono' }} size={18}>
-          Good thing this is on Devnet! This <Text i>is</Text> on Devnet ... right?
+          Good thing this is on Devnet! This <Text i>is</Text> on Devnet ...
+          right?
         </Text>
       </>
     );
@@ -64,7 +67,9 @@ const CheckInGuest = ({ partyData, partyAddress, guestPda }) => {
       <Text h2>It's time to check-in!</Text>
       <Spacer y={1} />
 
-      <Button size="lg" color="success" onClick={checkInGuest}>Check-in</Button>
+      <Button size="lg" color="success" onClick={checkInGuest}>
+        Check-in
+      </Button>
     </>
   );
 };

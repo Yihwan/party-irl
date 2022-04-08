@@ -65,7 +65,7 @@ const Join = () => {
             <Text weight="medium" small transform="uppercase">
               {dayjs(party.account.partyAt.toNumber() * 1000).format('LLL')}
             </Text>
-          <Spacer y={2} />
+            <Spacer y={2} />
           </div>
         ))}
     </>

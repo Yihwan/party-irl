@@ -82,15 +82,15 @@ const Party = ({ partyAddress }) => {
       <Text h1 css={{ textGradient: '45deg, $blue500 -20%, $pink500 50%' }}>
         {name}
       </Text>
-      
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href={`https://explorer.solana.com/address/${partyAddress}?cluster=devnet`}
-          style={{ fontWeight: 400 }}
-        >
-          <Text h4>{partyAddress}</Text>
-        </a>
+
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href={`https://explorer.solana.com/address/${partyAddress}?cluster=devnet`}
+        style={{ fontWeight: 400, wordBreak: 'break-word' }}
+      >
+        <Text h4>{shortenString(partyAddress)}</Text>
+      </a>
       <Spacer y={2} />
       <Text h4 i>
         created_by:{' '}
@@ -133,7 +133,7 @@ const Party = ({ partyAddress }) => {
         <span style={{ fontWeight: 400 }}>{checkedInGuestsCount}</span>
       </Text>
 
-      <Spacer y={3} />
+      <Spacer y={2} />
 
       <WalletMultiButton />
       <Spacer y={0.5} />
@@ -142,10 +142,10 @@ const Party = ({ partyAddress }) => {
           Connect your wallet (Devnet) to unlock party actions.
         </Text>
       )}
-      <Spacer y={2} />
+      <Spacer y={1} />
 
       {wallet && (
-        <PartyAction 
+        <PartyAction
           partyData={partyData}
           partyAddress={partyAddress}
           guestPda={guestPda}

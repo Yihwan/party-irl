@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 import Party from 'src/components/page/join/party';
 import Layout from 'src/components/layout';
@@ -8,9 +9,16 @@ const PartyPage = () => {
   const { partyAddress } = router.query;
 
   return (
-    <Layout>
-      <Party partyAddress={partyAddress} />
-    </Layout>
+    <>
+      <Head>
+        <title>Party time</title>
+        <link rel="icon" href="//balloon_favicon.png" />
+      </Head>
+
+      <Layout>
+        <Party partyAddress={partyAddress} />
+      </Layout>
+    </>
   );
 };
 

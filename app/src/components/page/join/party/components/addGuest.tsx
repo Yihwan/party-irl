@@ -23,17 +23,19 @@ const AddGuest = ({ partyData, partyAddress, guestPda }) => {
         }
       });
 
-      router.reload();      
-    } catch(error) {
+      router.reload();
+    } catch (error) {
       console.error(error);
     }
   };
 
   if (addedGuestsCount >= maximumGuests) {
-    return(
+    return (
       <>
         <Text h2>This party is full :(</Text>
-        <Text css={{ fontFamily: 'Space Mono' }} size={18}>Try joining another one — or start your own!</Text>
+        <Text css={{ fontFamily: 'Space Mono' }} size={18}>
+          Try joining another one — or start your own!
+        </Text>
       </>
     );
   }
@@ -42,13 +44,20 @@ const AddGuest = ({ partyData, partyAddress, guestPda }) => {
     <>
       <Text h2>There's a spot for you</Text>
       {stakeInLamports > 0 ? (
-        <Text css={{ fontFamily: 'Space Mono' }} size={18}>Stake {partyData.stakeInLamports / 1000} SOL to claim your spot. Get it back when you check-in.</Text>
+        <Text css={{ fontFamily: 'Space Mono' }} size={18}>
+          Stake {partyData.stakeInLamports / 1000} SOL to claim your spot. Get
+          it back when you check-in.
+        </Text>
       ) : (
-        <Text css={{ fontFamily: 'Space Mono' }} size={18}>No SOL needed to claim your spot.</Text>
+        <Text css={{ fontFamily: 'Space Mono' }} size={18}>
+          No SOL needed to claim your spot.
+        </Text>
       )}
       <Spacer y={2} />
 
-      <Button size="lg" color="success" onClick={addGuest}>Join {partyData.name.length > 24 ? 'this party' : partyData.name}</Button>
+      <Button size="lg" color="success" onClick={addGuest}>
+        Join {partyData.name.length > 24 ? 'this party' : partyData.name}
+      </Button>
     </>
   );
 };

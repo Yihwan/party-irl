@@ -3,14 +3,16 @@ import { web3, BN } from '@project-serum/anchor';
 import { Input, Spacer, Text, Button } from '@nextui-org/react';
 import { useState } from 'react';
 import useSolana from 'src/hooks/useSolana';
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 
 const Start = () => {
   const { wallet, program } = useSolana();
   const router = useRouter();
   const [name, setName] = useState('');
-  const [partyAtDate, setPartyAtDate] = useState(dayjs().add(1,'day').format('YYYY-MM-DD'));
+  const [partyAtDate, setPartyAtDate] = useState(
+    dayjs().add(1, 'day').format('YYYY-MM-DD')
+  );
   const [partyAtTime, setPartyAtTime] = useState('12:00');
   const [checkInDuration, setCheckInDuration] = useState('15');
   const [stakeInSol, setStakeInSol] = useState('0');
@@ -26,7 +28,7 @@ const Start = () => {
     const party = web3.Keypair.generate();
     const date = dayjs(`${partyAtDate}T${partyAtTime}`);
     const checkInDate = date.add(Number(checkInDuration), 'minutes');
-    
+
     const partyAtUnix = date.unix();
     const checkInEndsAtUnix = checkInDate.unix();
 
@@ -34,7 +36,7 @@ const Start = () => {
     if (partyAtUnix * 1000 < Date.now()) {
       return;
     }
-    
+
     try {
       await program.rpc.createParty(
         name,
@@ -79,16 +81,21 @@ const Start = () => {
       {wallet && (
         <ul style={{ maxWidth: '700px', listStyle: 'disc' }}>
           <Text as="li" size={18}>
-            Required: `party_name`, `party_at` (date and time), `check_in_duration` (min: 5 minutes), max_guests.
+            Required: `party_name`, `party_at` (date and time),
+            `check_in_duration` (min: 5 minutes), max_guests.
           </Text>
           <Text as="li" size={18}>
-            Optional: `stake_in_sol`. This is how much guests need to "stake" in order to get added to party. You get your stake back after you check-in (you lose it if you don't).
+            Optional: `stake_in_sol`. This is how much guests need to "stake" in
+            order to get added to party. You get your stake back after you
+            check-in. You lose it if you don't.
           </Text>
           <Text as="li" size={18}>
-            You have to add yourself as a guest after creating a party for now. Maybe I'll re-architect this some day.
+            You have to add yourself as a guest after creating a party for now.
+            Maybe I'll re-architect this some day.
           </Text>
           <Text as="li" size={18}>
-            After creating a party, you'll be re-directed to /join. Wait a couple seconds and refresh the page to see and join your party. (sns this was a hackathon project)
+            After creating a party, you'll be re-directed to /join. You party
+            will appear after it has been processed on the Solana blockchain.
           </Text>
         </ul>
       )}
@@ -96,7 +103,14 @@ const Start = () => {
       <Spacer y={2} />
 
       {wallet && (
-        <form onSubmit={createParty} style={{ maxWidth: '400px', display: 'flex', flexDirection: 'column' }}>
+        <form
+          onSubmit={createParty}
+          style={{
+            maxWidth: '400px',
+            display: 'flex',
+            flexDirection: 'column'
+          }}
+        >
           <Input
             required
             type="text"

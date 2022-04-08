@@ -20,7 +20,7 @@ const SettleGuest = ({ partyData, partyAddress, guestPda, guestData }) => {
           systemProgram: web3.SystemProgram.programId
         }
       });
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
   };
@@ -30,22 +30,32 @@ const SettleGuest = ({ partyData, partyAddress, guestPda, guestData }) => {
       <>
         <Text h2>You've already settled</Text>
         <Text css={{ fontFamily: 'Space Mono' }} size={18}>
-          Hope you had fun! :) 
+          Hope you had fun! :)
         </Text>
       </>
     );
   }
 
   return (
-      <>
-        <Text h2>Settle your stake</Text>
-        <Text css={{ fontFamily: 'Space Mono' }} size={18}>
-          You'll get your {stakeInLamports / 1_000_000_000} SOL back {addedGuestsCount !== checkedInGuestsCount ? `, plus ${(addedGuestsCount - checkedInGuestsCount * stakeInLamports)/addedGuestsCount * 1_000_000} SOL from people who didn't check in` : ''}.
-        </Text>
-        <Spacer y={2} />
+    <>
+      <Text h2>Settle your stake</Text>
+      <Text css={{ fontFamily: 'Space Mono' }} size={18}>
+        You'll get your {stakeInLamports / 1_000_000_000} SOL back{' '}
+        {addedGuestsCount !== checkedInGuestsCount
+          ? `, plus ${
+              ((addedGuestsCount - checkedInGuestsCount * stakeInLamports) /
+                addedGuestsCount) *
+              1_000_000
+            } SOL from people who didn't check in`
+          : ''}
+        .
+      </Text>
+      <Spacer y={2} />
 
-        <Button size="lg" color="success" onClick={settleGuest}>Settle</Button>
-      </>
+      <Button size="lg" color="success" onClick={settleGuest}>
+        Settle
+      </Button>
+    </>
   );
 };
 
