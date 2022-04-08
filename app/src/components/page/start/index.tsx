@@ -1,6 +1,6 @@
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { web3, BN } from '@project-serum/anchor';
-import { Input, Spacer, Text, Button } from '@nextui-org/react';
+import { Input, Spacer, Text } from '@nextui-org/react';
 import { useState } from 'react';
 import useSolana from 'src/hooks/useSolana';
 import dayjs from 'dayjs';
@@ -18,7 +18,7 @@ const Start = () => {
   const [stakeInSol, setStakeInSol] = useState('0');
   const [maximumGuests, setMaximumGuests] = useState('10');
 
-  const createParty = async (event: React.FormEvent<HTMLFormElement>) => {
+  const createParty = async (event) => {
     event.preventDefault();
 
     if (!wallet || !program) {

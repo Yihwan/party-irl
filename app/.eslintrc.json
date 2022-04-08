@@ -28,6 +28,7 @@
     }
   },
   "rules": {
+    "jsx-a11y/anchor-is-valid": "off",
     "react/react-in-jsx-scope": "off",
     "object-curly-spacing": ["warn", "always"],
     "no-unused-vars": [

@@ -39,7 +39,7 @@ const Party = ({ partyAddress }) => {
           return;
         }
 
-        const [guestPda, bump] = await PublicKey.findProgramAddress(
+        const [guestPda] = await PublicKey.findProgramAddress(
           ['guest', partyPublicKey.toBytes(), wallet.publicKey.toBytes()],
           program.programId
         );
