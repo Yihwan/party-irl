@@ -90,7 +90,7 @@ const Start = () => {
             check-in. You lose it if you don't.
           </Text>
           <Text as="li" size={18}>
-            You have to add yourself as a guest after creating a party for now.
+            After creating a party, you have to "join" it as a separate step.
             Maybe I'll re-architect this some day.
           </Text>
           <Text as="li" size={18}>

@@ -68,7 +68,7 @@ const Home = () => {
         House. I had fun, learned a lot, and met some great people. While party
         <b>IRL</b> shouldn't be deployed to mainnet (the code's a mess, and
         you'll probably lose all your money), it helped me realize chewing glass
-        wasn't so bad after all. I'd say that's a win.
+        wasn't so bad after all. I'd call that a win.
       </Text>
     </>
   );

@@ -18,7 +18,7 @@ const DUMMY_WALLET = {
 };
 
 const PROGRAM_ID = new PublicKey(idl.metadata.address);
-const CONNECTION_ENDPOINT = 'http://127.0.0.1:8899';
+const CONNECTION_ENDPOINT = 'https://api.devnet.solana.com';
 const PROVIDER_OPTIONS: { preflightCommitment: 'processed' } = {
   preflightCommitment: 'processed'
 };

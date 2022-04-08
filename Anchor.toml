@@ -1,13 +1,17 @@
 [features]
 seeds = false
+
 [programs.localnet]
+party_irl = "XxFzjuDV8dptxFvY5v4AzQZk9j8h8Afpoi8WNU6uVtq"
+
+[programs.devnet]
 party_irl = "XxFzjuDV8dptxFvY5v4AzQZk9j8h8Afpoi8WNU6uVtq"
 
 [registry]
 url = "https://anchor.projectserum.com"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "/Users/yihwankim/.config/solana/id.json"
 
 [scripts]

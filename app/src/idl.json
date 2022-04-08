@@ -197,42 +197,42 @@
     {
       "code": 6000,
       "name": "PartyNameTooLong",
-      "msg": "Party name can't be longer than 64 characters."
+      "msg": "Party name can't be longer than 64 characters"
     },
     {
       "code": 6001,
       "name": "PartyAtInThePast",
-      "msg": "Party start time can't be in the past."
+      "msg": "Party start time can't be in the past"
     },
     {
       "code": 6002,
       "name": "PartyFull",
-      "msg": "Party is full."
+      "msg": "Party is full"
     },
     {
       "code": 6003,
       "name": "CheckInTimeTooShort",
-      "msg": "Check-in time must be longer than 5 minutes."
+      "msg": "Check-in time must be longer than 5 minutes"
     },
     {
       "code": 6004,
       "name": "CheckInNotOpen",
-      "msg": "Check-in is not open."
+      "msg": "Check-in is not open"
     },
     {
       "code": 6005,
       "name": "AlreadyCheckedIn",
-      "msg": "You have already checked-in."
+      "msg": "You have already checked-in"
     },
     {
       "code": 6006,
       "name": "TooEarlyToSettle",
-      "msg": "Check-in is still open."
+      "msg": "Check-in is still open"
     },
     {
       "code": 6007,
       "name": "CannotSettle",
-      "msg": "You cannot settle."
+      "msg": "You cannot settle"
     }
   ],
   "metadata": {
