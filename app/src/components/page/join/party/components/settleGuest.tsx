@@ -56,9 +56,9 @@ const SettleGuest = ({ partyData, partyAddress, guestPda, guestData }) => {
     <>
       <Text h2>Settle your stake</Text>
       <Text css={{ fontFamily: 'Space Mono' }} size={18}>
-        You'll get your {stakeInLamports / 1_000_000_000} SOL back{' '}
+        You'll get your {stakeInLamports / 1_000_000_000} SOL back
         {addedGuestsCount !== checkedInGuestsCount
-          ? `, plus ${
+          ? ` , plus ${
               ((addedGuestsCount - checkedInGuestsCount * stakeInLamports) /
                 addedGuestsCount) *
               1_000_000
