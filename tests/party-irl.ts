@@ -46,7 +46,13 @@ describe("party-irl", () => {
 
   it('cannot create a party that starts in the past', async () => {
     try {
-      await createParty({ partyAt: 1649105580 });
+      const date = dayjs('2022-04-07T12:00');
+
+      console.log(date.format());
+      await createParty({ 
+        partyAt: date.unix(),
+        checkInEndsAt: dayjs().subtract(30, 'minute').unix(),
+      });
     } catch({ error }) {
         assert.equal(error.errorCode.code, 'PartyAtInThePast');
         return;
@@ -55,11 +61,11 @@ describe("party-irl", () => {
     assert.fail('The instruction should have failed.');
   });
 
-  it('cannot create a party with a check-in time less than 5 min', async () => {
+  it('cannot create a party with a check-in time less than 5 minute', async () => {
     try {
       await createParty({ 
-        partyAt: dayjs().add(60, 'min').unix(), 
-        checkInEndsAt: dayjs().add(61, 'min').unix(),
+        partyAt: dayjs().add(60, 'minute').unix(), 
+        checkInEndsAt: dayjs().add(61, 'minute').unix(),
       });
     } catch({ error }) {
         assert.equal(error.errorCode.code, 'CheckInTimeTooShort');

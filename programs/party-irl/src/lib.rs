@@ -17,7 +17,6 @@ pub mod party_irl {
         let party: &mut Account<Party> = &mut ctx.accounts.party;
         let creator: &Signer = &ctx.accounts.creator;
         let clock: Clock = Clock::get().unwrap();
-        msg!("{:?}", party_at);
 
         // Validations 
         if name.chars().count() > 64 {

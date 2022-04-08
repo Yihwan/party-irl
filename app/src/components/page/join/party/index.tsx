@@ -4,6 +4,7 @@ import useSolana from 'src/hooks/useSolana';
 import { Text, Spacer, Loading } from '@nextui-org/react';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 dayjs.extend(LocalizedFormat);
 
@@ -76,13 +77,20 @@ const Party = ({ partyAddress }) => {
     checkedInGuestsCount
   } = partyData;
 
-  console.log(partyData);
-
   return (
     <>
       <Text h1 css={{ textGradient: '45deg, $blue500 -20%, $pink500 50%' }}>
         {name}
       </Text>
+      
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={`https://explorer.solana.com/address/${partyAddress}?cluster=devnet`}
+          style={{ fontWeight: 400 }}
+        >
+          <Text h4>{partyAddress}</Text>
+        </a>
       <Spacer y={2} />
       <Text h4 i>
         created_by:{' '}
@@ -124,6 +132,26 @@ const Party = ({ partyAddress }) => {
         checked_in_guests_count:{' '}
         <span style={{ fontWeight: 400 }}>{checkedInGuestsCount}</span>
       </Text>
+
+      <Spacer y={3} />
+
+      <WalletMultiButton />
+      <Spacer y={0.5} />
+      {!wallet && (
+        <Text css={{ fontFamily: 'Space Mono' }} small>
+          Connect your wallet (Devnet) to unlock party actions.
+        </Text>
+      )}
+      <Spacer y={2} />
+
+      {wallet && (
+        <PartyAction 
+          partyData={partyData}
+          partyAddress={partyAddress}
+          guestPda={guestPda}
+          guestData={guestData}
+        />
+      )}
     </>
   );
 };
