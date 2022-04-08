@@ -2,11 +2,13 @@ import dayjs from 'dayjs';
 import useSolana from 'src/hooks/useSolana';
 import { web3 } from '@project-serum/anchor';
 import { Text, Button, Spacer } from '@nextui-org/react';
+import { useRouter } from 'next/router';
 
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 dayjs.extend(LocalizedFormat);
 
 const CheckInGuest = ({ partyData, partyAddress, guestPda }) => {
+  const router = useRouter();
   const { wallet, program } = useSolana();
   const { partyAt, checkInEndsAt } = partyData;
 
@@ -24,6 +26,8 @@ const CheckInGuest = ({ partyData, partyAddress, guestPda }) => {
           systemProgram: web3.SystemProgram.programId
         }
       });
+
+      router.reload();
     } catch(error) {
       console.error(error);
     }

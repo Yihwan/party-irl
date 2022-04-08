@@ -1,8 +1,10 @@
 import useSolana from 'src/hooks/useSolana';
 import { web3 } from '@project-serum/anchor';
 import { Text, Button, Spacer } from '@nextui-org/react';
+import { useRouter } from 'next/router';
 
 const AddGuest = ({ partyData, partyAddress, guestPda }) => {
+  const router = useRouter();
   const { wallet, program } = useSolana();
   const { maximumGuests, addedGuestsCount, stakeInLamports } = partyData;
 
@@ -20,6 +22,8 @@ const AddGuest = ({ partyData, partyAddress, guestPda }) => {
           systemProgram: web3.SystemProgram.programId
         }
       });
+
+      router.reload();      
     } catch(error) {
       console.error(error);
     }
