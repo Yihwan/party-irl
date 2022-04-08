@@ -8,7 +8,7 @@ const JoinPage: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Join a party</title>
+        <title>Join a party | partyIRL</title>
         <link rel="icon" href="/balloon_favicon.png" />
       </Head>
 

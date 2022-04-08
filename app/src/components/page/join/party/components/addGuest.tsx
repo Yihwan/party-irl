@@ -45,8 +45,8 @@ const AddGuest = ({ partyData, partyAddress, guestPda }) => {
       <Text h2>There's a spot for you</Text>
       {stakeInLamports > 0 ? (
         <Text css={{ fontFamily: 'Space Mono' }} size={18}>
-          Stake {partyData.stakeInLamports / 1000} SOL to claim your spot. Get
-          it back when you check-in.
+          Stake {partyData.stakeInLamports / 1_000_000_000} SOL to claim your
+          spot. Get it back when you check-in.
         </Text>
       ) : (
         <Text css={{ fontFamily: 'Space Mono' }} size={18}>

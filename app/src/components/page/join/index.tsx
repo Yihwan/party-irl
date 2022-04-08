@@ -31,7 +31,16 @@ const Join = () => {
   }, [program]);
 
   if (!parties) {
-    return <Loading />;
+    return (
+      <>
+        <Text h1 css={{ textGradient: '45deg, $blue500 -20%, $pink500 50%' }}>
+          Join a party
+        </Text>
+
+        <Spacer y={2} />
+        <Loading />
+      </>
+    );
   }
 
   return (

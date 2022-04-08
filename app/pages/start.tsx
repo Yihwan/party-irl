@@ -8,7 +8,7 @@ const StartPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Start a party</title>
+        <title>Start a party | partyIRL</title>
         <link rel="icon" href="/balloon_favicon.png" />
       </Head>
 

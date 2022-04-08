@@ -3,11 +3,6 @@ import CheckInGuest from './checkInGuest';
 import SettleGuest from './settleGuest';
 
 const PartyAction = ({ partyData, partyAddress, guestPda, guestData }) => {
-  console.log('partyData', partyData);
-  console.log('partyAddress', partyAddress);
-  console.log('guestPda', guestPda);
-  console.log('guestData', guestData);
-
   // Guest not added to party
   if (!guestData) {
     return (

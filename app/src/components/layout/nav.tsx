@@ -52,7 +52,8 @@ const Nav: FC = () => {
         borderBottom: hasScrolled ? '1px solid' : 'none',
         position: 'sticky',
         top: 0,
-        left: 0
+        left: 0,
+        zIndex: 300
       }}
     >
       <Container

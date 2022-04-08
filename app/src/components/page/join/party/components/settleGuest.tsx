@@ -1,6 +1,10 @@
 import useSolana from 'src/hooks/useSolana';
 import { web3 } from '@project-serum/anchor';
 import { Text, Button, Spacer } from '@nextui-org/react';
+import dayjs from 'dayjs';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+
+dayjs.extend(LocalizedFormat);
 
 const SettleGuest = ({ partyData, partyAddress, guestPda, guestData }) => {
   const { wallet, program } = useSolana();
@@ -31,6 +35,18 @@ const SettleGuest = ({ partyData, partyAddress, guestPda, guestData }) => {
         <Text h2>You've already settled</Text>
         <Text css={{ fontFamily: 'Space Mono' }} size={18}>
           Hope you had fun! :)
+        </Text>
+      </>
+    );
+  }
+
+  if (Date.now() < partyData.checkInEndsAt * 1000) {
+    return (
+      <>
+        <Text h2>Check-in ongoing</Text>
+        <Text css={{ fontFamily: 'Space Mono' }} size={18}>
+          Come back after {dayjs(partyData.checkInEndsAt * 1000).format('LLL')}{' '}
+          to settle.
         </Text>
       </>
     );

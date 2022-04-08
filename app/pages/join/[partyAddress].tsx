@@ -11,7 +11,7 @@ const PartyPage = () => {
   return (
     <>
       <Head>
-        <title>Party time</title>
+        <title>Party time | partyIRL</title>
         <link rel="icon" href="//balloon_favicon.png" />
       </Head>
 
