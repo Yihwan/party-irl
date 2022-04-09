@@ -32,6 +32,14 @@ const globalStyles = globalCss({
 
   pre: {
     backgroundColor: '$accents2',
+  },
+
+  ul: {
+    listStyle: 'inside disc',
+  },
+
+  ol: {
+    listStyle: 'inside numeric',
   }
 });
 
