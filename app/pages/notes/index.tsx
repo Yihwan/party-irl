@@ -7,7 +7,7 @@ import Layout from 'src/components/layout';
 import Notes from 'src/components/page/notes';
 
 const NotesPage: NextPage = ({ notes }) => {
-  console.log(notes)
+
   return (
     <div>
       <Head>
@@ -16,7 +16,7 @@ const NotesPage: NextPage = ({ notes }) => {
       </Head>
 
       <Layout>
-        <Notes />
+        <Notes notes={notes} />
       </Layout>
     </div>
   );

@@ -13,7 +13,7 @@ const Layout: FC = ({ children }) => {
       <Nav />
 
       <Container
-        css={{ padding: '3rem 1rem', minHeight: 'calc(100vh - 112px)' }}
+        css={{ padding: '3rem 1rem', minHeight: 'calc(100vh - 133px)' }}
       >
         <main>{children}</main>
       </Container>
