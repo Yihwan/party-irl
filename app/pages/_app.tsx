@@ -7,12 +7,22 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import WalletContext from 'src/contexts/wallet';
 import Layout from 'src/components/layout';
 
+const baseThemeObject = {
+  theme: {
+    fontSizes: {
+      base: '18px',
+    },
+  }
+};
+
 const lightTheme = createTheme({
-  type: 'light'
+  type: 'light',
+  ...baseThemeObject
 });
 
 const darkTheme = createTheme({
-  type: 'dark'
+  type: 'dark',
+  ...baseThemeObject
 });
 
 // @ts-ignore

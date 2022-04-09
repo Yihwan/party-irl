@@ -3,6 +3,7 @@ import Head from 'next/head';
 import fs from 'fs';
 import matter from 'gray-matter';
 import md from 'markdown-it';
+import { Container } from '@nextui-org/react';
 
 import Layout from 'src/components/layout';
 
@@ -15,8 +16,10 @@ const NotePage: NextPage = ({ frontmatter, content }) => {
       </Head>
 
       <Layout>
-        <h2>{frontmatter.title}</h2>
-        <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
+        <div style={{ maxWidth: '700px' }}>
+          <h2>{frontmatter.title}</h2>
+          <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
+        </div>
       </Layout>
     </div>
   );

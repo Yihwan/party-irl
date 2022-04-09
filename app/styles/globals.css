@@ -28,3 +28,7 @@ a {
 .wallet-adapter-dropdown-list {
   z-index: 201 !important;
 }
+
+p {
+  letter-spacing: unset;
+}
