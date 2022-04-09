@@ -12,7 +12,7 @@ const NotePage: NextPage = () => {
       </Head>
 
       <Layout>
-        notes
+        <h1>Testing</h1>
       </Layout>
     </div>
   );

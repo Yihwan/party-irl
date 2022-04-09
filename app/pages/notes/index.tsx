@@ -12,7 +12,13 @@ const NotesPage: NextPage = () => {
       </Head>
 
       <Layout>
-        notes index
+        <h1>Inspiration for partyIRL</h1>
+        <p>asddsa</p>
+        <p>asddsa</p>
+        <p>asddsa</p>
+        <p>asddsa</p>
+
+        <code>asd</code>
       </Layout>
     </div>
   );
