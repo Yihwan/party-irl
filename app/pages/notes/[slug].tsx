@@ -1,9 +1,12 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import fs from 'fs';
+import matter from 'gray-matter';
+import md from 'markdown-it';
 
 import Layout from 'src/components/layout';
 
-const NotePage: NextPage = () => {
+const NotePage: NextPage = ({ frontmatter, content }) => {
   return (
     <div>
       <Head>
@@ -12,10 +15,37 @@ const NotePage: NextPage = () => {
       </Head>
 
       <Layout>
-        <h1>Testing</h1>
+        <h2>{frontmatter.title}</h2>
+        <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
       </Layout>
     </div>
   );
 };
 
 export default NotePage;
+
+export async function getStaticPaths() {
+  const files = fs.readdirSync('notes');
+
+  const paths = files.map((fileName) => ({
+    params: {
+      slug: fileName.replace('.md', ''),
+    },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params: { slug } }) {
+  const fileName = fs.readFileSync(`notes/${slug}.md`, 'utf-8');
+  const { data: frontmatter, content } = matter(fileName);
+  return {
+    props: {
+      frontmatter,
+      content,
+    },
+  };
+}
