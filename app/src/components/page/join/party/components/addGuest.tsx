@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 const AddGuest = ({ partyData, partyAddress, guestPda }) => {
   const router = useRouter();
   const { wallet, program } = useSolana();
-  const { maximumGuests, addedGuestsCount, stakeInLamports } = partyData;
+  const { maximumGuests, addedGuestsCount, stakeInLamports, partyAt } = partyData;
 
   const addGuest = async () => {
     if (!program || !wallet) {
@@ -28,6 +28,17 @@ const AddGuest = ({ partyData, partyAddress, guestPda }) => {
       console.error(error);
     }
   };
+
+  if (partyAt.toNumber() * 1000 < Date.now()) {
+      return(
+        <>
+          <Text h2>This party is over!</Text>
+          <Text css={{ fontFamily: 'Space Mono' }} size={18}>
+            Try joining another one — or start your own.
+          </Text>
+        </>
+      )
+  }
 
   if (addedGuestsCount >= maximumGuests) {
     return (

@@ -55,6 +55,9 @@ const Home = () => {
           Settle to get your SOL back, plus any SOL from people who didn't
           check-in on time.
         </Text>
+        <Text as="li" size={18}>
+          Why?
+        </Text>
       </ol>
 
       <Spacer y={1} />
@@ -66,9 +69,8 @@ const Home = () => {
       >
         I hacked this together over a few days, mostly at the Miami Hacker
         House. I had fun, learned a lot, and met some great people. While party
-        <b>IRL</b> shouldn't be deployed to mainnet (the code's a mess, and
-        you'll probably lose all your money), it helped me realize chewing glass
-        wasn't so bad after all. I'd call that a win.
+        <b>IRL</b> shouldn't be deployed to mainnet (the code's a mess), it made me realize chewing glass
+        wasn't so bad after all.
       </Text>
     </>
   );
