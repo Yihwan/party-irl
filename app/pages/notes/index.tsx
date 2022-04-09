@@ -4,24 +4,19 @@ import fs from 'fs';
 import matter from 'gray-matter';
 
 import Layout from 'src/components/layout';
+import Notes from 'src/components/page/notes';
 
 const NotesPage: NextPage = ({ notes }) => {
   console.log(notes)
   return (
     <div>
       <Head>
-        <title>Join a party | partyIRL</title>
+        <title>Notes | partyIRL</title>
         <link rel="icon" href="/balloon_favicon.png" />
       </Head>
 
       <Layout>
-        <h1>Inspiration for partyIRL</h1>
-        <p>asddsa</p>
-        <p>asddsa</p>
-        <p>asddsa</p>
-        <p>asddsa</p>
-
-        <code>asd</code>
+        <Notes />
       </Layout>
     </div>
   );
