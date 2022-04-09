@@ -12,9 +12,13 @@ Something title paragraph
 
 Something title paragraph
 
-```js
-  const somethign = hello;
-```
+<pre>
+const somethign = hello;
+
+forEach(array => {
+  asdasd
+})
+</pre>
 
 * testing one 
 * testing two
