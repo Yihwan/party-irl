@@ -14,13 +14,16 @@ Something title paragraph
 
 Something title paragraph
 
-<pre>
+This should be a code block (multi-line):
+```js
 const somethign = hello;
 
 forEach(array => {
   asdasd
 })
-</pre>
+```
+
+This should be an inline code block: `hello` 
 
 * testing one 
 * testing two
