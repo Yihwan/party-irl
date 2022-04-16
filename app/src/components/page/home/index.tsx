@@ -55,9 +55,6 @@ const Home = () => {
           Settle to get your SOL back, plus any SOL from people who didn't
           check-in on time.
         </Text>
-        <Text as="li" size={18}>
-          Why?
-        </Text>
       </ol>
 
       <Spacer y={1} />
