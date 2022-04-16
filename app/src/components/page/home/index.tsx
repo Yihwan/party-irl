@@ -40,7 +40,7 @@ const Home = () => {
 
       <Text h3>How it (should) work:</Text>
 
-      <ol style={{ maxWidth: '700px' }}>
+      <ol style={{ maxWidth: '700px', marginLeft: '1rem' }}>
         <Text as="li" size={18}>
           <Link href="/join">Join</Link> or <Link href="/start">start</Link> a
           party.

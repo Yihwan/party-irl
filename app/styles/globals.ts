@@ -13,12 +13,12 @@ const globalStyles = globalCss({
   },
 
   ul: {
-    listStyle: 'inside disc'
+    listStyle: 'inside disc',
   },
 
   ol: {
-    listStyle: 'inside numeric'
-  }
+    listStyle: 'inside numeric',
+  },
 });
 
 export default globalStyles;
