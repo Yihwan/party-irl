@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import { NextUIProvider, createTheme } from '@nextui-org/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import globalStyles from '../styles/globals';
+import '../styles/global.css';
 
 import WalletContext from 'src/contexts/wallet';
 import Layout from 'src/components/layout';
