@@ -95,7 +95,8 @@ const Start = () => {
           </Text>
           <Text as="li" size={18}>
             After creating a party, you'll be re-directed to /join. You party
-            will appear after it has been processed on the Solana blockchain.
+            will appear after it has been processed on the Solana blockchain
+            (refresh if you don't see it right away).
           </Text>
         </ul>
       )}

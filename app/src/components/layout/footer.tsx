@@ -8,7 +8,7 @@ const Footer = () => {
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href={`https://yihwan.kim`}
+          href={`https://twitter.com/yihwan`}
         >
           yihwan
         </a>

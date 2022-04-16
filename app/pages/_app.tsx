@@ -1,18 +1,28 @@
 import { ErrorBoundary } from 'react-error-boundary';
-import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { NextUIProvider, createTheme } from '@nextui-org/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import globalStyles from '../styles/globals';
 
 import WalletContext from 'src/contexts/wallet';
 import Layout from 'src/components/layout';
 
+const baseThemeObject = {
+  theme: {
+    fontSizes: {
+      base: '18px'
+    }
+  }
+};
+
 const lightTheme = createTheme({
-  type: 'light'
+  type: 'light',
+  ...baseThemeObject
 });
 
 const darkTheme = createTheme({
-  type: 'dark'
+  type: 'dark',
+  ...baseThemeObject
 });
 
 // @ts-ignore
@@ -28,6 +38,8 @@ const ErrorFallback = ({ error }) => {
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
+  globalStyles();
+
   return (
     <ErrorBoundary
       FallbackComponent={ErrorFallback}

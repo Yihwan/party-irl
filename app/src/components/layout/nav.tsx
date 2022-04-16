@@ -3,7 +3,7 @@ import { Container } from '@nextui-org/react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useTheme as useNextTheme } from 'next-themes';
-import { useTheme } from '@nextui-org/react';
+import { useTheme, Spacer } from '@nextui-org/react';
 
 import { shortenString } from 'src/utils';
 
@@ -94,14 +94,16 @@ const Nav: FC = () => {
             ))}
         </div>
 
-        <div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Link href="/notes">notes</Link>
+
+          <Spacer x={1} />
+
           <button
             style={{
-              fontSize: '24px',
               padding: 0,
               border: 0,
               backgroundColor: 'transparent',
-              lineHeight: 1,
               cursor: 'pointer'
             }}
             onClick={() => setTheme(isDark ? 'light' : 'dark')}
